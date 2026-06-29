@@ -1,0 +1,54 @@
+feature:
+  id:
+  domain:
+  name:
+  status: draft
+
+sources:
+  feature_spec:
+  criteria:
+  task_breakdown:
+  jira_specs: []
+
+qase:
+  project:
+  suite:
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers: []
+
+criteria:
+  - title:
+    source:
+    coverage: missing
+    notes:
+    jira: []
+    test_cases:
+      - local_id:
+        title:
+        qase_case_id:
+        sync_status: draft
+        sync_action: none
+        tags: []
+
+test_cases:
+  - local_id: TC-001
+    title:
+    status: draft
+    type:
+    priority:
+    severity:
+    behavior:
+    layer:
+    suite:
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: []
+    related_jira: []
+    tags: []
+    automation_status: manual

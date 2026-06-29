@@ -1,0 +1,6 @@
+## action1
+```mermaid
+flowchart TD 
+    A[Action1] -->|condition| Feature1(Feature 1)
+    Feature1 --> Feature2(Feature 2)
+```

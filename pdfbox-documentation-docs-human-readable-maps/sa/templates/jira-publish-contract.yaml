@@ -1,0 +1,53 @@
+# Publishing contract for Jira issue creation/update.
+# This template is Jira-instance-specific and should be copied or adapted
+# when a team works with another Jira workspace.
+
+instance:
+  name: "jira.softdev.pw"
+  project_key: "PDF"
+
+source_of_truth:
+  jira_spec: "jira/*.md"
+  description_transport: "rendered-from-structure"
+
+rendering:
+  preferred_format: "jira-wiki"
+  fallback_format: "plain-text"
+  allow_nested_lists: true
+  inline_code_style: "double-braces"
+  heading_style: "h2"
+
+verification:
+  require_probe_for_new_instance: true
+  verify_render_after_publish: true
+  verify_items:
+    - "section headings render as headings or clearly separated labels"
+    - "flat bullet lists remain bullets"
+    - "nested lists remain nested"
+    - "acceptance criteria remain ordered"
+    - "inline code for paths and endpoints remains readable"
+
+update_policy:
+  full_replace_fields:
+    - "summary"
+    - "description"
+    - "labels"
+    - "priority"
+  preserve_unless_requested:
+    - "status"
+    - "assignee"
+    - "story points"
+    - "sprint"
+    - "parent"
+
+description_structure:
+  - "Business Context"
+  - "Repository Scope"
+  - "Problem Statement"
+  - "Scope"
+  - "Out of Scope"
+  - "Implementation Notes"
+  - "Acceptance Criteria"
+  - "Dependencies"
+  - "Risks"
+  - "Handoff to DEV"

@@ -1,0 +1,15 @@
+{
+  "name": "pdfbox-documentation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "qase:sync": "node scripts/qase-sync.js",
+    "qase:sync:dry-run": "node scripts/qase-sync.js --dry-run"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
