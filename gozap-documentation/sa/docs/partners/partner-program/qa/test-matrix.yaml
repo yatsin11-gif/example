@@ -121,13 +121,27 @@ criteria:
 
   - title: Выплаты через Stripe — обработка ошибки
     source: requirements/feature-criteria.md#выплаты-через-stripe
-    coverage: partial
-    notes: Сценарий отсутствия счёта/карты к моменту выплаты не определён продуктом
+    coverage: covered
+    notes:
     jira:
       - backend-partner-program-stripe-payouts.md
     test_cases:
       - local_id: TC-006
         title: Ежемесячная выплата не теряет баланс при ошибке Stripe
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, payments, stripe]
+
+  - title: Выплаты через Stripe — отсутствие счёта/карты
+    source: requirements/feature-criteria.md#выплаты-через-stripe
+    coverage: covered
+    notes:
+    jira:
+      - backend-partner-program-stripe-payouts.md
+    test_cases:
+      - local_id: TC-011
+        title: Отложенная выплата при отсутствии счёта/карты выполняется после его указания
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -370,3 +384,22 @@ test_cases:
       - backend-partner-program-accounts-stations-balance.md
     tags: [partners, admin]
     automation_status: manual
+
+  - local_id: TC-011
+    title: Отложенная выплата при отсутствии счёта/карты выполняется после его указания
+    status: draft
+    type: Functional
+    priority: High
+    severity: Major
+    behavior: Negative
+    layer: API
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Выплаты через Stripe — отсутствие счёта/карты]
+    related_jira:
+      - backend-partner-program-stripe-payouts.md
+    tags: [partners, payments, stripe]
+    automation_status: automation candidate

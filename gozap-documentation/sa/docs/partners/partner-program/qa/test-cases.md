@@ -20,9 +20,9 @@
 
 ## Coverage Summary
 
-- Criteria total: 9
-- Covered: 7
-- Partial: 2
+- Criteria total: 10
+- Covered: 9
+- Partial: 1
 - Missing: 0
 - Blocked: 0
 
@@ -367,6 +367,43 @@
 
 - 
 
+### TC-011: Отложенная выплата при отсутствии счёта/карты выполняется после его указания
+
+- Status: Draft
+- Type: Functional
+- Priority: High
+- Severity: Major
+- Behavior: Negative
+- Layer: API
+- Suite: Partner Program
+- Related criteria: Выплаты через Stripe — отсутствие счёта/карты
+- Related Jira: `backend-partner-program-stripe-payouts.md`
+- Qase case: Не назначено
+- Tags: `partners`, `payments`, `stripe`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- У партнёра есть ненулевой накопленный баланс.
+- Партнёр не указал банковский счёт/карту.
+
+#### Test Data
+
+- Партнёр без указанного счёта/карты на момент планового запуска scheduled job.
+
+#### Steps
+
+1. Action: Дождаться/инициировать запуск ежемесячного scheduled job выплаты при отсутствии у партнёра указанного счёта/карты.
+   Expected result: Выплата не выполняется, накопленный баланс партнёра сохраняется без потери; новая запись об ошибке/пропуске в истории не создаётся как успешная выплата.
+2. Action: Партнёр указывает банковский счёт/карту.
+   Expected result: Накопленный баланс выплачивается немедленно, появляется запись в истории выплат.
+3. Action: Дождаться/инициировать следующий плановый запуск scheduled job.
+   Expected result: Выплата выполняется по обычному ежемесячному расписанию.
+
+#### Notes
+
+- Закрывает прежний открытый вопрос о поведении при отсутствии счёта/карты на момент плановой выплаты.
+
 ## Smoke Candidates
 
 - TC-001
@@ -378,10 +415,10 @@
 - TC-002
 - TC-003
 - TC-006
+- TC-011
 
 ## Coverage Gaps
 
-- Нет автоматических тестов на сценарий отсутствия счёта/карты к моменту плановой выплаты (поведение продукта не определено).
 - Нет test case на KYC/верификацию партнёра — продуктовое поведение не подтверждено.
 
 ## Open Questions

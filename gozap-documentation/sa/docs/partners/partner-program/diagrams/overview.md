@@ -25,8 +25,11 @@ flowchart TD
 flowchart LR
     RENT[Завершённая аренда на станции] --> CALC[Расчёт доли партнёра<br/>по % на момент завершения]
     CALC --> BAL[(Баланс партнёра)]
-    SCHED[Ежемесячный scheduled job] --> PAY[Stripe payout]
-    BAL --> PAY
+    SCHED[Ежемесячный scheduled job] --> CARD{Счёт/карта указаны?}
+    BAL --> CARD
+    CARD -->|да| PAY[Stripe payout]
+    CARD -->|нет| WAIT[Выплата откладывается,<br/>баланс сохраняется без потери]
+    WAIT --> ADDCARD[Партнёр указывает счёт/карту] --> PAY
     PAY -->|успех| HIST[(История выплат)]
     PAY -->|ошибка| KEEP[Баланс сохраняется без потери]
     RESET[Запрос сброса пароля] --> TWILIO[Twilio SMS код]
