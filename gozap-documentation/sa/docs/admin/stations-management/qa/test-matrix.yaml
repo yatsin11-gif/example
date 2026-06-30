@@ -1,0 +1,129 @@
+feature:
+  id: stations-management
+  domain: admin
+  name: "Управление станциями в админке"
+  status: draft
+
+sources:
+  feature_spec: sa/docs/admin/stations-management/requirements/feature-spec.md
+  criteria: sa/docs/admin/stations-management/requirements/feature-criteria.md
+  task_breakdown: sa/docs/admin/stations-management/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/admin/stations-management/jira/backend-stations-management-crud.md
+    - sa/docs/admin/stations-management/jira/frontend-stations-management-admin-section.md
+
+qase:
+  project:
+  suite: Stations Management
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Создание станции
+    source: requirements/feature-criteria.md#создание-станции
+    coverage: partial
+    notes: Точный набор полей станции не зафиксирован
+    jira:
+      - frontend-stations-management-admin-section.md
+      - backend-stations-management-crud.md
+    test_cases:
+      - local_id: TC-001
+        title: Администратор с доступом к разделу «Станции» создаёт станцию
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, stations]
+
+  - title: Архивирование станции
+    source: requirements/feature-criteria.md#архивирование-станции
+    coverage: covered
+    notes:
+    jira:
+      - frontend-stations-management-admin-section.md
+      - backend-stations-management-crud.md
+    test_cases:
+      - local_id: TC-002
+        title: Администратор архивирует станцию
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, stations]
+
+  - title: Правила пользовательского поведения
+    source: requirements/feature-criteria.md#правила-пользовательского-поведения
+    coverage: covered
+    notes:
+    jira:
+      - backend-stations-management-crud.md
+    test_cases:
+      - local_id: TC-003
+        title: Администратор без доступа к разделу «Станции» не видит раздел
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, stations, security]
+
+test_cases:
+  - local_id: TC-001
+    title: Администратор с доступом к разделу «Станции» создаёт станцию
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Stations Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание станции]
+    related_jira:
+      - frontend-stations-management-admin-section.md
+      - backend-stations-management-crud.md
+    tags: [admin, stations]
+    automation_status: manual
+
+  - local_id: TC-002
+    title: Администратор архивирует станцию
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Stations Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Архивирование станции]
+    related_jira:
+      - frontend-stations-management-admin-section.md
+      - backend-stations-management-crud.md
+    tags: [admin, stations]
+    automation_status: manual
+
+  - local_id: TC-003
+    title: Администратор без доступа к разделу «Станции» не видит раздел
+    status: draft
+    type: Security
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: E2E
+    suite: Stations Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Правила пользовательского поведения]
+    related_jira:
+      - backend-stations-management-crud.md
+    tags: [admin, stations, security]
+    automation_status: automation candidate

@@ -1,0 +1,286 @@
+feature:
+  id: user-management
+  domain: admin
+  name: "Управление пользователями в админке"
+  status: draft
+
+sources:
+  feature_spec: sa/docs/admin/user-management/requirements/feature-spec.md
+  criteria: sa/docs/admin/user-management/requirements/feature-criteria.md
+  task_breakdown: sa/docs/admin/user-management/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/admin/user-management/jira/backend-user-management-crud.md
+    - sa/docs/admin/user-management/jira/frontend-user-management-admin-section.md
+
+qase:
+  project:
+  suite: User Management
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Создание пользователя
+    source: requirements/feature-criteria.md#создание-пользователя
+    coverage: partial
+    notes: Точный обязательный набор полей не зафиксирован
+    jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    test_cases:
+      - local_id: TC-001
+        title: Администратор с доступом к разделу «Пользователи» создаёт пользователя
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users]
+
+  - title: Промоаккаунт
+    source: requirements/feature-criteria.md#промоаккаунт
+    coverage: partial
+    notes: Точный эффект промоаккаунта не зафиксирован
+    jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    test_cases:
+      - local_id: TC-002
+        title: Администратор выдаёт промоаккаунт пользователю
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users]
+      - local_id: TC-003
+        title: Администратор снимает промоаккаунт у пользователя
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users]
+
+  - title: Блокировка
+    source: requirements/feature-criteria.md#блокировка
+    coverage: covered
+    notes:
+    jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    test_cases:
+      - local_id: TC-004
+        title: Администратор блокирует пользователя
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users]
+
+  - title: Карточка пользователя
+    source: requirements/feature-criteria.md#карточка-пользователя
+    coverage: covered
+    notes:
+    jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    test_cases:
+      - local_id: TC-005
+        title: Карточка пользователя отображает имя, телефон, почту, текущую аренду и историю аренд
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users]
+      - local_id: TC-006
+        title: Карточка пользователя без завершённых аренд отображает пустую историю
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users]
+
+  - title: Список пользователей
+    source: requirements/feature-criteria.md#список-пользователей
+    coverage: covered
+    notes:
+    jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    test_cases:
+      - local_id: TC-007
+        title: Пользователь, созданный через станцию, виден и управляем в разделе «Пользователи»
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users]
+
+  - title: Правила пользовательского поведения
+    source: requirements/feature-criteria.md#правила-пользовательского-поведения
+    coverage: covered
+    notes:
+    jira:
+      - backend-user-management-crud.md
+    test_cases:
+      - local_id: TC-008
+        title: Администратор без доступа к разделу «Пользователи» не видит раздел
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, users, security]
+
+test_cases:
+  - local_id: TC-001
+    title: Администратор с доступом к разделу «Пользователи» создаёт пользователя
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание пользователя]
+    related_jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    tags: [admin, users]
+    automation_status: manual
+
+  - local_id: TC-002
+    title: Администратор выдаёт промоаккаунт пользователю
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Промоаккаунт]
+    related_jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    tags: [admin, users]
+    automation_status: manual
+
+  - local_id: TC-003
+    title: Администратор снимает промоаккаунт у пользователя
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Normal
+    behavior: Positive
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Промоаккаунт]
+    related_jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    tags: [admin, users]
+    automation_status: manual
+
+  - local_id: TC-004
+    title: Администратор блокирует пользователя
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Блокировка]
+    related_jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    tags: [admin, users]
+    automation_status: manual
+
+  - local_id: TC-005
+    title: Карточка пользователя отображает имя, телефон, почту, текущую аренду и историю аренд
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Карточка пользователя]
+    related_jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    tags: [admin, users]
+    automation_status: manual
+
+  - local_id: TC-006
+    title: Карточка пользователя без завершённых аренд отображает пустую историю
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Normal
+    behavior: Edge case
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Карточка пользователя]
+    related_jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    tags: [admin, users]
+    automation_status: manual
+
+  - local_id: TC-007
+    title: Пользователь, созданный через станцию, виден и управляем в разделе «Пользователи»
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Список пользователей]
+    related_jira:
+      - frontend-user-management-admin-section.md
+      - backend-user-management-crud.md
+    tags: [admin, users]
+    automation_status: manual
+
+  - local_id: TC-008
+    title: Администратор без доступа к разделу «Пользователи» не видит раздел
+    status: draft
+    type: Security
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: E2E
+    suite: User Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Правила пользовательского поведения]
+    related_jira:
+      - backend-user-management-crud.md
+    tags: [admin, users, security]
+    automation_status: automation candidate

@@ -12,7 +12,7 @@
 разработку** продукта GoZap (аренда powerbank через станции). Здесь не пишут код. Здесь сырые
 заметки SA (`gozap_story.csv`) превращаются в проверяемую постановку, разбиваются на задачи,
 доводятся до Jira и QA, и только потом уходят в целевые репозитории (`gozap-admin`,
-`gozap-kiosk-app`, `gozap-backend`).
+`gozap-kiosk-app`, `gozap-backend`, `gozap-app`).
 
 ## Как устроен процесс
 
@@ -47,15 +47,18 @@ sa/docs/<domain>/<feature>/
 
 ## Текущие фичи
 
-- **partners / partner-program** — управление партнёрами и станциями, расчёт баланса, выплаты через Stripe, сброс пароля через Twilio. [Схема](./partners/partner-program/diagrams/overview.md) · [Spec](./partners/partner-program/requirements/feature-spec.md)
-- **admin / admin-roles** — роли в админке: супер-админ создаёт администраторов с уровнем доступа. [Схема](./admin/admin-roles/diagrams/overview.md) · [Spec](./admin/admin-roles/requirements/feature-spec.md)
-- **kiosk / terminal-rental-flow** — основной flow аренды на станции (номер, SMS-код, карта, PowerBank) и упрощённый flow для разряженного телефона. [Схема](./kiosk/terminal-rental-flow/diagrams/overview.md) · [Spec](./kiosk/terminal-rental-flow/requirements/feature-spec.md)
+- **partners / partner-program** — управление партнёрами (создание, редактирование, список, информация) и станциями, расчёт баланса, выплаты через Stripe, сброс пароля через Twilio. [Схема](./partners/partner-program/diagrams/overview.md) · [Spec](./partners/partner-program/requirements/feature-spec.md)
+- **admin / admin-roles** — роли в админке: супер-админ создаёт администраторов и назначает им набор конкретных разделов (Станции, Пользователи, Партнёры). [Схема](./admin/admin-roles/diagrams/overview.md) · [Spec](./admin/admin-roles/requirements/feature-spec.md)
+- **admin / stations-management** — раздел «Станции»: список станций, создание, архивирование. [Схема](./admin/stations-management/diagrams/overview.md) · [Spec](./admin/stations-management/requirements/feature-spec.md)
+- **admin / user-management** — раздел «Пользователи»: список, создание пользователя, выдача/снятие промоаккаунта, блокировка, карточка пользователя (включая текущую аренду и историю). [Схема](./admin/user-management/diagrams/overview.md) · [Spec](./admin/user-management/requirements/feature-spec.md)
+- **kiosk / terminal-rental-flow** — основной flow аренды на станции (номер, SMS-код, карта, PowerBank), синхронизация аренды с `gozap-app`, push/SMS уведомления, упрощённый flow для разряженного телефона. [Схема](./kiosk/terminal-rental-flow/diagrams/overview.md) · [Spec](./kiosk/terminal-rental-flow/requirements/feature-spec.md)
 - **auth / sms-autofill** — автоподстановка SMS-кода на экране станции. [Схема](./auth/sms-autofill/diagrams/overview.md) · [Spec](./auth/sms-autofill/requirements/feature-spec.md)
 
 ## Внешние интеграции (зафиксировано SA)
 
 - **Stripe** — выплаты партнёрам (раз в месяц, накопленный баланс). Платёжный провайдер для оплаты картой на станции **не подтверждён** — отдельный от Stripe (открытый вопрос).
-- **Twilio** — все SMS-сценарии: подтверждение номера при аренде, сброс пароля партнёра, уведомление о начале аренды.
+- **Twilio** — все SMS-сценарии: подтверждение номера при аренде, сброс пароля партнёра, уведомление о начале и завершении аренды.
+- **gozap-app** — мобильное приложение пользователя; получает аренду, начатую через станцию, и push-уведомления о начале/завершении аренды (если приложение установлено). В этой итерации — только backend-контракт синхронизации, без UI-экранов.
 
 ---
 

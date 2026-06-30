@@ -20,8 +20,8 @@
 
 ## Coverage Summary
 
-- Criteria total: 6
-- Covered: 4
+- Criteria total: 7
+- Covered: 5
 - Partial: 2
 - Missing: 0
 - Blocked: 0
@@ -95,15 +95,15 @@
 #### Steps
 
 1. Action: Приложить карту, оплата которой будет отклонена.
-   Expected result: Оплата отклонена, отображается понятный экран ошибки.
-2. Action: Проверить состояние выдачи на станции.
-   Expected result: Команда на выдачу PowerBank не отправлена, PowerBank не выдан.
+   Expected result: Оплата отклонена, отображается понятный экран ошибки на станции.
+2. Action: Проверить состояние выдачи на станции и наличие записи об аренде.
+   Expected result: Аренда не создаётся, команда на выдачу PowerBank не отправлена, PowerBank не выдан.
 
 #### Notes
 
 - 
 
-### TC-003: Неверный SMS-код не создаёт аккаунт
+### TC-003: Неверный SMS-код не создаёт аккаунт и не создаёт аренду
 
 - Status: Draft
 - Type: Functional
@@ -129,7 +129,7 @@
 #### Steps
 
 1. Action: Ввести неверный SMS-код на экране подтверждения.
-   Expected result: Код не подтверждён, аккаунт не создаётся, пользователю показано сообщение об ошибке.
+   Expected result: Код не подтверждён, аккаунт не создаётся, аренда не создаётся, пользователю показано сообщение об ошибке на станции.
 2. Action: Ввести корректный код повторно.
    Expected result: Подтверждение проходит успешно, flow продолжается на экран привязки карты.
 
@@ -241,6 +241,140 @@
 
 - 
 
+### TC-007: Аренда, начатая через станцию, видна в `gozap-app` при совпадении номера
+
+- Status: Draft
+- Type: Functional
+- Priority: Medium
+- Severity: Major
+- Behavior: Positive
+- Layer: API
+- Suite: Terminal Rental Flow
+- Related criteria: Синхронизация с приложением и уведомления
+- Related Jira: `backend-terminal-rental-app-sync-notifications.md`
+- Qase case: Не назначено
+- Tags: `kiosk`, `rental`, `app-sync`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- Пользователь успешно прошёл основной flow аренды на станции.
+- Тот же номер телефона авторизован в `gozap-app`.
+
+#### Test Data
+
+- Номер телефона, совпадающий в аккаунте станции и в `gozap-app`.
+
+#### Steps
+
+1. Action: Завершить основной flow аренды на станции с успешной оплатой.
+   Expected result: Аренда создана.
+2. Action: Открыть `gozap-app`, авторизованный тем же номером телефона.
+   Expected result: Аренда, начатая через станцию, видна в `gozap-app`.
+
+#### Notes
+
+- `gozap-app` специфицирован этой фичей только как backend-контракт синхронизации; экраны приложения вне scope (см. open questions).
+
+### TC-008: Push + SMS уведомление о начале аренды при установленном `gozap-app`
+
+- Status: Draft
+- Type: Functional
+- Priority: Medium
+- Severity: Major
+- Behavior: Positive
+- Layer: API
+- Suite: Terminal Rental Flow
+- Related criteria: Синхронизация с приложением и уведомления
+- Related Jira: `backend-terminal-rental-app-sync-notifications.md`
+- Qase case: Не назначено
+- Tags: `kiosk`, `notifications`, `app-sync`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- У пользователя установлено `gozap-app` и он авторизован тем же номером телефона.
+
+#### Test Data
+
+- Номер телефона с установленным `gozap-app`.
+
+#### Steps
+
+1. Action: Завершить основной flow аренды на станции с успешной оплатой.
+   Expected result: Пользователь получает push-уведомление в `gozap-app` и SMS через Twilio о начале аренды.
+
+#### Notes
+
+- Push-провайдер `gozap-app` не подтверждён (см. open questions).
+
+### TC-009: Только SMS, без push, если `gozap-app` не установлено
+
+- Status: Draft
+- Type: Functional
+- Priority: Low
+- Severity: Minor
+- Behavior: Negative
+- Layer: API
+- Suite: Terminal Rental Flow
+- Related criteria: Синхронизация с приложением и уведомления
+- Related Jira: `backend-terminal-rental-app-sync-notifications.md`
+- Qase case: Не назначено
+- Tags: `kiosk`, `notifications`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- У пользователя не установлено `gozap-app`.
+
+#### Test Data
+
+- Номер телефона без `gozap-app`.
+
+#### Steps
+
+1. Action: Завершить основной flow аренды на станции с успешной оплатой.
+   Expected result: Пользователь получает только SMS через Twilio о начале аренды, push не отправляется.
+
+#### Notes
+
+- 
+
+### TC-010: Аренда не синхронизируется в чужой аккаунт `gozap-app`
+
+- Status: Draft
+- Type: Functional
+- Priority: Medium
+- Severity: Major
+- Behavior: Negative
+- Layer: API
+- Suite: Terminal Rental Flow
+- Related criteria: Синхронизация с приложением и уведомления
+- Related Jira: `backend-terminal-rental-app-sync-notifications.md`
+- Qase case: Не назначено
+- Tags: `kiosk`, `rental`, `app-sync`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- Пользователь авторизован на станции номером телефона A.
+- В `gozap-app` авторизован другой пользователь с номером телефона B.
+
+#### Test Data
+
+- Два разных номера телефона (A и B).
+
+#### Steps
+
+1. Action: Завершить основной flow аренды на станции номером A с успешной оплатой.
+   Expected result: Аренда создана для номера A.
+2. Action: Открыть `gozap-app`, авторизованный номером B.
+   Expected result: Аренда, начатая номером A, не отображается в аккаунте номера B.
+
+#### Notes
+
+- 
+
 ## Smoke Candidates
 
 - TC-001
@@ -252,13 +386,19 @@
 - TC-003
 - TC-005
 - TC-006
+- TC-007
+- TC-008
+- TC-009
+- TC-010
 
 ## Coverage Gaps
 
-- Нет test case на flow окончания аренды и возврата powerbank — не входит в текущие входные данные (вне scope).
+- Нет test case на flow окончания аренды и возврата powerbank — не входит в текущие входные данные (вне scope), кроме уже зафиксированного правила уведомлений (push + SMS), которое отдельно не тестируется до появления самого flow.
 - Точный платёжный провайдер терминала не подтверждён, что ограничивает детализацию тестовых данных для TC-001/TC-002/TC-004/TC-005.
+- Push-провайдер `gozap-app` не подтверждён, что ограничивает детализацию TC-008/TC-009.
 
 ## Open Questions
 
 - Какой платёжный провайдер используется для обработки карты на терминале станции — влияет на sandbox-данные для TC-001, TC-002, TC-004, TC-005.
-- Что именно показывается пользователю при ошибке SMS-кода или отклонении оплаты — влияет на expected result в TC-002, TC-003, TC-005.
+- Какой push-провайдер используется в `gozap-app` — влияет на тестовые данные для TC-008, TC-009.
+- `gozap-app` уже существует как продукт или backend-контракт синхронизации тестируется заранее для будущей реализации — влияет на возможность E2E-прогона TC-007, TC-010.

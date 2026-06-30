@@ -11,6 +11,7 @@ sources:
   jira_specs:
     - sa/docs/kiosk/terminal-rental-flow/jira/backend-terminal-rental-phone-confirmation-account.md
     - sa/docs/kiosk/terminal-rental-flow/jira/backend-terminal-rental-payment-and-dispense.md
+    - sa/docs/kiosk/terminal-rental-flow/jira/backend-terminal-rental-app-sync-notifications.md
     - sa/docs/kiosk/terminal-rental-flow/jira/backend-terminal-rental-low-battery-flow.md
     - sa/docs/kiosk/terminal-rental-flow/jira/frontend-terminal-rental-main-flow-screens.md
     - sa/docs/kiosk/terminal-rental-flow/jira/frontend-terminal-rental-low-battery-flow.md
@@ -103,6 +104,38 @@ criteria:
         sync_status: draft
         sync_action: create
         tags: [kiosk, rental, low-battery]
+
+  - title: Синхронизация с приложением и уведомления
+    source: requirements/feature-criteria.md#синхронизация-с-приложением-и-уведомления
+    coverage: partial
+    notes: Push-провайдер `gozap-app` не подтверждён; существование `gozap-app` как продукта не подтверждено
+    jira:
+      - backend-terminal-rental-app-sync-notifications.md
+    test_cases:
+      - local_id: TC-007
+        title: Аренда, начатая через станцию, видна в `gozap-app` при совпадении номера
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, rental, app-sync]
+      - local_id: TC-008
+        title: Push + SMS уведомление о начале аренды при установленном `gozap-app`
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, notifications, app-sync]
+      - local_id: TC-009
+        title: Только SMS, без push, если `gozap-app` не установлено
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, notifications]
+      - local_id: TC-010
+        title: Аренда не синхронизируется в чужой аккаунт `gozap-app`
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, rental, app-sync]
 
 test_cases:
   - local_id: TC-001
@@ -220,4 +253,80 @@ test_cases:
     related_jira:
       - backend-terminal-rental-payment-and-dispense.md
     tags: [kiosk, twilio, notifications]
+    automation_status: automation candidate
+
+  - local_id: TC-007
+    title: Аренда, начатая через станцию, видна в `gozap-app` при совпадении номера
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Positive
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Синхронизация с приложением и уведомления]
+    related_jira:
+      - backend-terminal-rental-app-sync-notifications.md
+    tags: [kiosk, rental, app-sync]
+    automation_status: automation candidate
+
+  - local_id: TC-008
+    title: Push + SMS уведомление о начале аренды при установленном `gozap-app`
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Positive
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Синхронизация с приложением и уведомления]
+    related_jira:
+      - backend-terminal-rental-app-sync-notifications.md
+    tags: [kiosk, notifications, app-sync]
+    automation_status: automation candidate
+
+  - local_id: TC-009
+    title: Только SMS, без push, если `gozap-app` не установлено
+    status: draft
+    type: Functional
+    priority: Low
+    severity: Minor
+    behavior: Negative
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Синхронизация с приложением и уведомления]
+    related_jira:
+      - backend-terminal-rental-app-sync-notifications.md
+    tags: [kiosk, notifications]
+    automation_status: automation candidate
+
+  - local_id: TC-010
+    title: Аренда не синхронизируется в чужой аккаунт `gozap-app`
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Синхронизация с приложением и уведомления]
+    related_jira:
+      - backend-terminal-rental-app-sync-notifications.md
+    tags: [kiosk, rental, app-sync]
     automation_status: automation candidate

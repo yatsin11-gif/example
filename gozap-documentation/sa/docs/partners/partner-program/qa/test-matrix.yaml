@@ -41,6 +41,12 @@ criteria:
         sync_status: draft
         sync_action: create
         tags: [partners, admin]
+      - local_id: TC-010
+        title: Администратор редактирует данные партнёра
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, admin]
 
   - title: Учёт начислений только за период привязки
     source: requirements/feature-criteria.md#начисление-баланса
@@ -342,5 +348,25 @@ test_cases:
     related_criteria: [Администратор видит то же, что партнёр]
     related_jira:
       - frontend-partner-program-admin-section.md
+    tags: [partners, admin]
+    automation_status: manual
+
+  - local_id: TC-010
+    title: Администратор редактирует данные партнёра
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Positive
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание и управление партнёром (администратор)]
+    related_jira:
+      - frontend-partner-program-admin-section.md
+      - backend-partner-program-accounts-stations-balance.md
     tags: [partners, admin]
     automation_status: manual

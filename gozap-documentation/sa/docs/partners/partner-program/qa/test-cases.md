@@ -335,6 +335,38 @@
 
 - 
 
+### TC-010: Администратор редактирует данные партнёра
+
+- Status: Draft
+- Type: Functional
+- Priority: Medium
+- Severity: Major
+- Behavior: Positive
+- Layer: E2E
+- Suite: Partner Program
+- Related criteria: Создание и управление партнёром (администратор)
+- Related Jira: `frontend-partner-program-admin-section.md`, `backend-partner-program-accounts-stations-balance.md`
+- Qase case: Не назначено
+- Tags: `partners`, `admin`
+- Automation status: manual
+
+#### Preconditions
+
+- Существует ранее созданный партнёр.
+
+#### Test Data
+
+- Новое имя и телефон для существующего партнёра.
+
+#### Steps
+
+1. Action: Открыть карточку партнёра и отредактировать имя и телефон.
+   Expected result: Изменённые данные сохраняются и отображаются в списке и карточке партнёра.
+
+#### Notes
+
+- 
+
 ## Smoke Candidates
 
 - TC-001

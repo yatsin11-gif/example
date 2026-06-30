@@ -33,13 +33,13 @@ criteria:
       - backend-admin-roles-rbac.md
     test_cases:
       - local_id: TC-001
-        title: Супер-админ создаёт администратора с уровнем доступа
+        title: Супер-админ создаёт администратора с набором разделов
         qase_case_id:
         sync_status: draft
         sync_action: create
         tags: [admin, roles]
       - local_id: TC-002
-        title: Форма создания администратора не сохраняется без уровня доступа
+        title: Форма создания администратора не сохраняется без выбранного раздела
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -59,15 +59,15 @@ criteria:
         sync_action: create
         tags: [admin, roles, navigation]
 
-  - title: Авторизация по уровню доступа
-    source: requirements/feature-criteria.md#авторизация-по-уровню-доступа
+  - title: Авторизация по разделам
+    source: requirements/feature-criteria.md#авторизация-по-разделам
     coverage: partial
     notes: Точный код ответа/поведение при недоступном разделе не подтверждены
     jira:
       - backend-admin-roles-rbac.md
     test_cases:
       - local_id: TC-004
-        title: Backend отклоняет обращение администратора к недоступному разделу
+        title: Backend отклоняет обращение администратора к неназначенному разделу
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -82,7 +82,7 @@ criteria:
       - frontend-admin-roles-create-and-navigation.md
     test_cases:
       - local_id: TC-005
-        title: Администратор не может изменить собственный уровень доступа
+        title: Администратор не может изменить собственный набор разделов
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -90,7 +90,7 @@ criteria:
 
 test_cases:
   - local_id: TC-001
-    title: Супер-админ создаёт администратора с уровнем доступа
+    title: Супер-админ создаёт администратора с набором разделов
     status: draft
     type: Functional
     priority: High
@@ -110,7 +110,7 @@ test_cases:
     automation_status: manual
 
   - local_id: TC-002
-    title: Форма создания администратора не сохраняется без уровня доступа
+    title: Форма создания администратора не сохраняется без выбранного раздела
     status: draft
     type: Functional
     priority: Medium
@@ -149,7 +149,7 @@ test_cases:
     automation_status: manual
 
   - local_id: TC-004
-    title: Backend отклоняет обращение администратора к недоступному разделу
+    title: Backend отклоняет обращение администратора к неназначенному разделу
     status: draft
     type: Security
     priority: High
@@ -161,14 +161,14 @@ test_cases:
     sync_status: draft
     sync_action: create
     last_synced_at:
-    related_criteria: [Авторизация по уровню доступа]
+    related_criteria: [Авторизация по разделам]
     related_jira:
       - backend-admin-roles-rbac.md
     tags: [admin, roles, security]
     automation_status: automation candidate
 
   - local_id: TC-005
-    title: Администратор не может изменить собственный уровень доступа
+    title: Администратор не может изменить собственный набор разделов
     status: draft
     type: Security
     priority: Medium
