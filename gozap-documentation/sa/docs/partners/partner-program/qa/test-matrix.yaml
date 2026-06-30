@@ -1,0 +1,346 @@
+feature:
+  id: partner-program
+  domain: partners
+  name: "Партнёрская программа"
+  status: draft
+
+sources:
+  feature_spec: sa/docs/partners/partner-program/requirements/feature-spec.md
+  criteria: sa/docs/partners/partner-program/requirements/feature-criteria.md
+  task_breakdown: sa/docs/partners/partner-program/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/partners/partner-program/jira/backend-partner-program-accounts-stations-balance.md
+    - sa/docs/partners/partner-program/jira/backend-partner-program-stripe-payouts.md
+    - sa/docs/partners/partner-program/jira/backend-partner-program-sms-password-reset.md
+    - sa/docs/partners/partner-program/jira/frontend-partner-program-admin-section.md
+    - sa/docs/partners/partner-program/jira/frontend-partner-program-partner-dashboard.md
+
+qase:
+  project:
+  suite: Partner Program
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Создание и управление партнёром (администратор)
+    source: requirements/feature-criteria.md#создание-и-управление-партнёром-администратор
+    coverage: covered
+    notes:
+    jira:
+      - frontend-partner-program-admin-section.md
+      - backend-partner-program-accounts-stations-balance.md
+    test_cases:
+      - local_id: TC-001
+        title: Администратор создаёт партнёра и привязывает станцию с процентом
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, admin]
+
+  - title: Учёт начислений только за период привязки
+    source: requirements/feature-criteria.md#начисление-баланса
+    coverage: covered
+    notes:
+    jira:
+      - backend-partner-program-accounts-stations-balance.md
+    test_cases:
+      - local_id: TC-002
+        title: Баланс партнёра не пересчитывается задним числом после отвязки станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, balance]
+
+  - title: Правила пользовательского поведения — изоляция данных партнёра
+    source: requirements/feature-criteria.md#правила-пользовательского-поведения
+    coverage: covered
+    notes:
+    jira:
+      - frontend-partner-program-partner-dashboard.md
+    test_cases:
+      - local_id: TC-003
+        title: Партнёр видит только свои станции и данные
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, security]
+
+  - title: Сводка за период
+    source: requirements/feature-criteria.md#сводка-за-период
+    coverage: covered
+    notes:
+    jira:
+      - frontend-partner-program-partner-dashboard.md
+    test_cases:
+      - local_id: TC-004
+        title: Сводка за период и детализация по станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, reporting]
+
+  - title: Детализация по станции
+    source: requirements/feature-criteria.md#детализация-по-станции
+    coverage: covered
+    notes:
+    jira:
+      - frontend-partner-program-partner-dashboard.md
+    test_cases:
+      - local_id: TC-004
+        title: Сводка за период и детализация по станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, reporting]
+
+  - title: Выплаты через Stripe
+    source: requirements/feature-criteria.md#выплаты-через-stripe
+    coverage: partial
+    notes: Точный Stripe-продукт и сценарий KYC не подтверждены
+    jira:
+      - backend-partner-program-stripe-payouts.md
+      - frontend-partner-program-partner-dashboard.md
+    test_cases:
+      - local_id: TC-005
+        title: Партнёр указывает счёт/карту и получает автоматическую ежемесячную выплату через Stripe
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, payments, stripe]
+
+  - title: Выплаты через Stripe — обработка ошибки
+    source: requirements/feature-criteria.md#выплаты-через-stripe
+    coverage: partial
+    notes: Сценарий отсутствия счёта/карты к моменту выплаты не определён продуктом
+    jira:
+      - backend-partner-program-stripe-payouts.md
+    test_cases:
+      - local_id: TC-006
+        title: Ежемесячная выплата не теряет баланс при ошибке Stripe
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, payments, stripe]
+
+  - title: Вход и восстановление доступа (партнёр)
+    source: requirements/feature-criteria.md#вход-и-восстановление-доступа-партнёр
+    coverage: covered
+    notes:
+    jira:
+      - backend-partner-program-sms-password-reset.md
+    test_cases:
+      - local_id: TC-007
+        title: Сброс пароля партнёра через SMS
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, auth, twilio]
+
+  - title: CSV-экспорт
+    source: requirements/feature-criteria.md#выплаты
+    coverage: covered
+    notes:
+    jira:
+      - frontend-partner-program-partner-dashboard.md
+      - backend-partner-program-stripe-payouts.md
+    test_cases:
+      - local_id: TC-008
+        title: CSV-экспорт по заработку и выплатам
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, export]
+
+  - title: Администратор видит то же, что партнёр
+    source: requirements/feature-criteria.md#создание-и-управление-партнёром-администратор
+    coverage: covered
+    notes:
+    jira:
+      - frontend-partner-program-admin-section.md
+    test_cases:
+      - local_id: TC-009
+        title: Администратор открывает представление «как у партнёра»
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, admin]
+
+test_cases:
+  - local_id: TC-001
+    title: Администратор создаёт партнёра и привязывает станцию с процентом
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание и управление партнёром (администратор)]
+    related_jira:
+      - frontend-partner-program-admin-section.md
+      - backend-partner-program-accounts-stations-balance.md
+    tags: [partners, admin]
+    automation_status: manual
+
+  - local_id: TC-002
+    title: Баланс партнёра не пересчитывается задним числом после отвязки станции
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: API
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Учёт начислений только за период привязки]
+    related_jira:
+      - backend-partner-program-accounts-stations-balance.md
+    tags: [partners, balance]
+    automation_status: automation candidate
+
+  - local_id: TC-003
+    title: Партнёр видит только свои станции и данные
+    status: draft
+    type: Security
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: API
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Правила пользовательского поведения — изоляция данных партнёра]
+    related_jira:
+      - frontend-partner-program-partner-dashboard.md
+    tags: [partners, security]
+    automation_status: automation candidate
+
+  - local_id: TC-004
+    title: Сводка за период и детализация по станции
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Positive
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Сводка за период, Детализация по станции]
+    related_jira:
+      - frontend-partner-program-partner-dashboard.md
+    tags: [partners, reporting]
+    automation_status: manual
+
+  - local_id: TC-005
+    title: Партнёр указывает счёт/карту и получает автоматическую ежемесячную выплату через Stripe
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Выплаты через Stripe]
+    related_jira:
+      - backend-partner-program-stripe-payouts.md
+      - frontend-partner-program-partner-dashboard.md
+    tags: [partners, payments, stripe]
+    automation_status: manual
+
+  - local_id: TC-006
+    title: Ежемесячная выплата не теряет баланс при ошибке Stripe
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: API
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Выплаты через Stripe — обработка ошибки]
+    related_jira:
+      - backend-partner-program-stripe-payouts.md
+    tags: [partners, payments, stripe]
+    automation_status: automation candidate
+
+  - local_id: TC-007
+    title: Сброс пароля партнёра через SMS
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Positive
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Вход и восстановление доступа (партнёр)]
+    related_jira:
+      - backend-partner-program-sms-password-reset.md
+    tags: [partners, auth, twilio]
+    automation_status: manual
+
+  - local_id: TC-008
+    title: CSV-экспорт по заработку и выплатам
+    status: draft
+    type: Functional
+    priority: Low
+    severity: Minor
+    behavior: Positive
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [CSV-экспорт]
+    related_jira:
+      - frontend-partner-program-partner-dashboard.md
+      - backend-partner-program-stripe-payouts.md
+    tags: [partners, export]
+    automation_status: manual
+
+  - local_id: TC-009
+    title: Администратор открывает представление «как у партнёра»
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Positive
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Администратор видит то же, что партнёр]
+    related_jira:
+      - frontend-partner-program-admin-section.md
+    tags: [partners, admin]
+    automation_status: manual

@@ -1,0 +1,188 @@
+feature:
+  id: admin-roles
+  domain: admin
+  name: "Роли в админке"
+  status: draft
+
+sources:
+  feature_spec: sa/docs/admin/admin-roles/requirements/feature-spec.md
+  criteria: sa/docs/admin/admin-roles/requirements/feature-criteria.md
+  task_breakdown: sa/docs/admin/admin-roles/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/admin/admin-roles/jira/backend-admin-roles-rbac.md
+    - sa/docs/admin/admin-roles/jira/frontend-admin-roles-create-and-navigation.md
+
+qase:
+  project:
+  suite: Admin Roles
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Создание администратора (супер-админ)
+    source: requirements/feature-criteria.md#создание-администратора-супер-админ
+    coverage: covered
+    notes:
+    jira:
+      - frontend-admin-roles-create-and-navigation.md
+      - backend-admin-roles-rbac.md
+    test_cases:
+      - local_id: TC-001
+        title: Супер-админ создаёт администратора с уровнем доступа
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, roles]
+      - local_id: TC-002
+        title: Форма создания администратора не сохраняется без уровня доступа
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, roles, validation]
+
+  - title: Вход и навигация (администратор)
+    source: requirements/feature-criteria.md#вход-и-навигация-администратор
+    coverage: covered
+    notes:
+    jira:
+      - frontend-admin-roles-create-and-navigation.md
+    test_cases:
+      - local_id: TC-003
+        title: Администратор видит только разрешённые разделы навигации
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, roles, navigation]
+
+  - title: Авторизация по уровню доступа
+    source: requirements/feature-criteria.md#авторизация-по-уровню-доступа
+    coverage: partial
+    notes: Точный код ответа/поведение при недоступном разделе не подтверждены
+    jira:
+      - backend-admin-roles-rbac.md
+    test_cases:
+      - local_id: TC-004
+        title: Backend отклоняет обращение администратора к недоступному разделу
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, roles, security]
+
+  - title: Правила пользовательского поведения
+    source: requirements/feature-criteria.md#правила-пользовательского-поведения
+    coverage: covered
+    notes:
+    jira:
+      - backend-admin-roles-rbac.md
+      - frontend-admin-roles-create-and-navigation.md
+    test_cases:
+      - local_id: TC-005
+        title: Администратор не может изменить собственный уровень доступа
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, roles, security]
+
+test_cases:
+  - local_id: TC-001
+    title: Супер-админ создаёт администратора с уровнем доступа
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание администратора (супер-админ)]
+    related_jira:
+      - frontend-admin-roles-create-and-navigation.md
+      - backend-admin-roles-rbac.md
+    tags: [admin, roles]
+    automation_status: manual
+
+  - local_id: TC-002
+    title: Форма создания администратора не сохраняется без уровня доступа
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: E2E
+    suite: Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание администратора (супер-админ)]
+    related_jira:
+      - frontend-admin-roles-create-and-navigation.md
+      - backend-admin-roles-rbac.md
+    tags: [admin, roles, validation]
+    automation_status: automation candidate
+
+  - local_id: TC-003
+    title: Администратор видит только разрешённые разделы навигации
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Вход и навигация (администратор)]
+    related_jira:
+      - frontend-admin-roles-create-and-navigation.md
+    tags: [admin, roles, navigation]
+    automation_status: manual
+
+  - local_id: TC-004
+    title: Backend отклоняет обращение администратора к недоступному разделу
+    status: draft
+    type: Security
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: API
+    suite: Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Авторизация по уровню доступа]
+    related_jira:
+      - backend-admin-roles-rbac.md
+    tags: [admin, roles, security]
+    automation_status: automation candidate
+
+  - local_id: TC-005
+    title: Администратор не может изменить собственный уровень доступа
+    status: draft
+    type: Security
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: API
+    suite: Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Правила пользовательского поведения]
+    related_jira:
+      - backend-admin-roles-rbac.md
+      - frontend-admin-roles-create-and-navigation.md
+    tags: [admin, roles, security]
+    automation_status: automation candidate

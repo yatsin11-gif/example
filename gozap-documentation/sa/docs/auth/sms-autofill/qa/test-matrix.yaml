@@ -1,0 +1,124 @@
+feature:
+  id: sms-autofill
+  domain: auth
+  name: "Автоподстановка SMS-кода"
+  status: draft
+
+sources:
+  feature_spec: sa/docs/auth/sms-autofill/requirements/feature-spec.md
+  criteria: sa/docs/auth/sms-autofill/requirements/feature-criteria.md
+  task_breakdown: sa/docs/auth/sms-autofill/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/auth/sms-autofill/jira/frontend-sms-autofill-code-field.md
+
+qase:
+  project:
+  suite: SMS Autofill
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Автоподстановка кода подтверждения
+    source: requirements/feature-criteria.md#автоподстановка-кода-подтверждения
+    coverage: partial
+    notes: Технический механизм автоподстановки на стороне станции не подтверждён
+    jira:
+      - frontend-sms-autofill-code-field.md
+    test_cases:
+      - local_id: TC-001
+        title: Код из входящего SMS автоматически подставляется в поле ввода
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, auth, autofill]
+      - local_id: TC-002
+        title: Ручной ввод кода доступен, если автоподстановка не сработала
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, auth, autofill]
+
+  - title: Правила пользовательского поведения
+    source: requirements/feature-criteria.md#правила-пользовательского-поведения
+    coverage: covered
+    notes:
+    jira:
+      - frontend-sms-autofill-code-field.md
+    test_cases:
+      - local_id: TC-003
+        title: Автоподстановка применяется только к коду текущей сессии на этой станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, auth, autofill, security]
+
+  - title: Автоматическая отправка формы после автоподстановки
+    source: requirements/feature-criteria.md#правила-пользовательского-поведения
+    coverage: partial
+    notes: Продуктовое поведение не подтверждено (открытый вопрос)
+    jira:
+      - frontend-sms-autofill-code-field.md
+    test_cases: []
+
+test_cases:
+  - local_id: TC-001
+    title: Код из входящего SMS автоматически подставляется в поле ввода
+    status: draft
+    type: Functional
+    priority: Low
+    severity: Minor
+    behavior: Positive
+    layer: E2E
+    suite: SMS Autofill
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Автоподстановка кода подтверждения]
+    related_jira:
+      - frontend-sms-autofill-code-field.md
+    tags: [kiosk, auth, autofill]
+    automation_status: manual
+
+  - local_id: TC-002
+    title: Ручной ввод кода доступен, если автоподстановка не сработала
+    status: draft
+    type: Functional
+    priority: Low
+    severity: Minor
+    behavior: Negative
+    layer: E2E
+    suite: SMS Autofill
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Автоподстановка кода подтверждения]
+    related_jira:
+      - frontend-sms-autofill-code-field.md
+    tags: [kiosk, auth, autofill]
+    automation_status: manual
+
+  - local_id: TC-003
+    title: Автоподстановка применяется только к коду текущей сессии на этой станции
+    status: draft
+    type: Security
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: E2E
+    suite: SMS Autofill
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Правила пользовательского поведения]
+    related_jira:
+      - frontend-sms-autofill-code-field.md
+    tags: [kiosk, auth, autofill, security]
+    automation_status: automation candidate

@@ -1,0 +1,223 @@
+feature:
+  id: terminal-rental-flow
+  domain: kiosk
+  name: "Приложение станций — основной flow аренды"
+  status: draft
+
+sources:
+  feature_spec: sa/docs/kiosk/terminal-rental-flow/requirements/feature-spec.md
+  criteria: sa/docs/kiosk/terminal-rental-flow/requirements/feature-criteria.md
+  task_breakdown: sa/docs/kiosk/terminal-rental-flow/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/kiosk/terminal-rental-flow/jira/backend-terminal-rental-phone-confirmation-account.md
+    - sa/docs/kiosk/terminal-rental-flow/jira/backend-terminal-rental-payment-and-dispense.md
+    - sa/docs/kiosk/terminal-rental-flow/jira/backend-terminal-rental-low-battery-flow.md
+    - sa/docs/kiosk/terminal-rental-flow/jira/frontend-terminal-rental-main-flow-screens.md
+    - sa/docs/kiosk/terminal-rental-flow/jira/frontend-terminal-rental-low-battery-flow.md
+
+qase:
+  project:
+  suite: Terminal Rental Flow
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Ввод номера и подтверждение SMS
+    source: requirements/feature-criteria.md#ввод-номера-и-подтверждение-sms
+    coverage: covered
+    notes:
+    jira:
+      - backend-terminal-rental-phone-confirmation-account.md
+      - frontend-terminal-rental-main-flow-screens.md
+    test_cases:
+      - local_id: TC-001
+        title: "Основной flow аренды: номер телефона, SMS-код, карта, выдача PowerBank"
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, rental, payments]
+      - local_id: TC-003
+        title: Неверный SMS-код не создаёт аккаунт
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, auth, twilio]
+
+  - title: Привязка карты и оплата
+    source: requirements/feature-criteria.md#привязка-карты-и-оплата
+    coverage: partial
+    notes: Платёжный провайдер терминала не подтверждён
+    jira:
+      - backend-terminal-rental-payment-and-dispense.md
+    test_cases:
+      - local_id: TC-001
+        title: "Основной flow аренды: номер телефона, SMS-код, карта, выдача PowerBank"
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, rental, payments]
+      - local_id: TC-006
+        title: SMS-уведомление о начале аренды отправляется после успешной оплаты
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, twilio, notifications]
+
+  - title: Правила пользовательского поведения
+    source: requirements/feature-criteria.md#правила-пользовательского-поведения
+    coverage: covered
+    notes:
+    jira:
+      - backend-terminal-rental-payment-and-dispense.md
+      - backend-terminal-rental-low-battery-flow.md
+    test_cases:
+      - local_id: TC-002
+        title: PowerBank не выдаётся без подтверждённой оплаты в основном flow
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, rental, payments]
+      - local_id: TC-005
+        title: Упрощённый flow — PowerBank не выдаётся без подтверждённой оплаты
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, rental, low-battery, payments]
+
+  - title: Flow для разряженного телефона
+    source: requirements/feature-criteria.md#flow-для-разряженного-телефона
+    coverage: partial
+    notes: Платёжный провайдер терминала не подтверждён
+    jira:
+      - backend-terminal-rental-low-battery-flow.md
+      - frontend-terminal-rental-low-battery-flow.md
+    test_cases:
+      - local_id: TC-004
+        title: Упрощённый flow для разряженного телефона — оплата картой без номера
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [kiosk, rental, low-battery]
+
+test_cases:
+  - local_id: TC-001
+    title: "Основной flow аренды: номер телефона, SMS-код, карта, выдача PowerBank"
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Ввод номера и подтверждение SMS, Привязка карты и оплата]
+    related_jira:
+      - backend-terminal-rental-phone-confirmation-account.md
+      - backend-terminal-rental-payment-and-dispense.md
+      - frontend-terminal-rental-main-flow-screens.md
+    tags: [kiosk, rental, payments]
+    automation_status: manual
+
+  - local_id: TC-002
+    title: PowerBank не выдаётся без подтверждённой оплаты в основном flow
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Правила пользовательского поведения]
+    related_jira:
+      - backend-terminal-rental-payment-and-dispense.md
+    tags: [kiosk, rental, payments]
+    automation_status: automation candidate
+
+  - local_id: TC-003
+    title: Неверный SMS-код не создаёт аккаунт
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Ввод номера и подтверждение SMS]
+    related_jira:
+      - backend-terminal-rental-phone-confirmation-account.md
+    tags: [kiosk, auth, twilio]
+    automation_status: automation candidate
+
+  - local_id: TC-004
+    title: Упрощённый flow для разряженного телефона — оплата картой без номера
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Flow для разряженного телефона]
+    related_jira:
+      - backend-terminal-rental-low-battery-flow.md
+      - frontend-terminal-rental-low-battery-flow.md
+    tags: [kiosk, rental, low-battery]
+    automation_status: manual
+
+  - local_id: TC-005
+    title: Упрощённый flow — PowerBank не выдаётся без подтверждённой оплаты
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Critical
+    behavior: Negative
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Правила пользовательского поведения]
+    related_jira:
+      - backend-terminal-rental-low-battery-flow.md
+    tags: [kiosk, rental, low-battery, payments]
+    automation_status: automation candidate
+
+  - local_id: TC-006
+    title: SMS-уведомление о начале аренды отправляется после успешной оплаты
+    status: draft
+    type: Functional
+    priority: Low
+    severity: Minor
+    behavior: Positive
+    layer: API
+    suite: Terminal Rental Flow
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Привязка карты и оплата]
+    related_jira:
+      - backend-terminal-rental-payment-and-dispense.md
+    tags: [kiosk, twilio, notifications]
+    automation_status: automation candidate
