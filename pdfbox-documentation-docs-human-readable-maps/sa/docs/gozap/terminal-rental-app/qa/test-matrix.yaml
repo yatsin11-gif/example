@@ -1,0 +1,175 @@
+feature:
+  id: gozap-terminal-rental-app
+  domain: gozap
+  name: Приложение станций для оплаты через терминал
+  status: draft
+
+sources:
+  feature_spec: sa/docs/gozap/terminal-rental-app/requirements/feature-spec.md
+  criteria: sa/docs/gozap/terminal-rental-app/requirements/feature-criteria.md
+  task_breakdown: sa/docs/gozap/terminal-rental-app/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/gozap/terminal-rental-app/jira/backend-account-creation-and-card-binding.md
+    - sa/docs/gozap/terminal-rental-app/jira/backend-payment-and-powerbank-dispense.md
+    - sa/docs/gozap/terminal-rental-app/jira/app-main-rental-flow-ui.md
+    - sa/docs/gozap/terminal-rental-app/jira/app-low-battery-flow-ui.md
+
+qase:
+  project:
+  suite: Gozap / Terminal Rental App
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Основной поток (номер, SMS, карта, выдача powerbank)
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [backend-account-creation-and-card-binding.md, backend-payment-and-powerbank-dispense.md, app-main-rental-flow-ui.md]
+    test_cases:
+      - local_id: TC-001
+        title: Основной поток — номер, SMS-код, карта, выдача powerbank
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [rental, terminal]
+  - title: Упрощённый поток для разряженного телефона
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [app-low-battery-flow-ui.md]
+    test_cases:
+      - local_id: TC-002
+        title: Упрощённый поток для разряженного телефона
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [rental, terminal, low-battery]
+  - title: Обработка неверного SMS-кода
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [../auth/jira/backend-sms-otp-service.md]
+    test_cases:
+      - local_id: TC-003
+        title: Неверный SMS-код в основном потоке
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [rental, terminal, negative]
+  - title: Powerbank не выдаётся без подтверждённой оплаты
+    source: feature-criteria.md#be-criteria
+    coverage: covered
+    notes:
+    jira: [backend-payment-and-powerbank-dispense.md]
+    test_cases:
+      - local_id: TC-004
+        title: Отклонённая оплата картой не приводит к выдаче powerbank
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [rental, stripe, negative]
+  - title: Оплата успешна, но станция не выдала powerbank
+    source: feature-criteria.md#open-questions
+    coverage: missing
+    notes: ожидаемое поведение не подтверждено SA
+    jira: [backend-payment-and-powerbank-dispense.md]
+    test_cases:
+      - local_id: TC-005
+        title: Оплата успешна, но станция не выдала powerbank
+        qase_case_id:
+        sync_status: draft
+        sync_action: none
+        tags: [rental, coverage-gap]
+
+test_cases:
+  - local_id: TC-001
+    title: Основной поток — номер, SMS-код, карта, выдача powerbank
+    status: draft
+    type: functional
+    priority: high
+    severity: high
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Terminal Rental App
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Основной поток (номер, SMS, карта, выдача powerbank)]
+    related_jira: [backend-account-creation-and-card-binding.md, backend-payment-and-powerbank-dispense.md, app-main-rental-flow-ui.md]
+    tags: [rental, terminal]
+    automation_status: candidate
+  - local_id: TC-002
+    title: Упрощённый поток для разряженного телефона
+    status: draft
+    type: functional
+    priority: high
+    severity: high
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Terminal Rental App
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Упрощённый поток для разряженного телефона]
+    related_jira: [app-low-battery-flow-ui.md]
+    tags: [rental, terminal, low-battery]
+    automation_status: candidate
+  - local_id: TC-003
+    title: Неверный SMS-код в основном потоке
+    status: draft
+    type: functional
+    priority: medium
+    severity: medium
+    behavior: negative
+    layer: e2e
+    suite: Gozap / Terminal Rental App
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Обработка неверного SMS-кода]
+    related_jira: [../auth/jira/backend-sms-otp-service.md]
+    tags: [rental, terminal, negative]
+    automation_status: candidate
+  - local_id: TC-004
+    title: Отклонённая оплата картой не приводит к выдаче powerbank
+    status: draft
+    type: functional
+    priority: high
+    severity: high
+    behavior: negative
+    layer: api
+    suite: Gozap / Terminal Rental App
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Powerbank не выдаётся без подтверждённой оплаты]
+    related_jira: [backend-payment-and-powerbank-dispense.md]
+    tags: [rental, stripe, negative]
+    automation_status: candidate
+  - local_id: TC-005
+    title: Оплата успешна, но станция не выдала powerbank
+    status: draft
+    type: functional
+    priority: medium
+    severity: high
+    behavior: edge-case
+    layer: e2e
+    suite: Gozap / Terminal Rental App
+    qase_case_id:
+    sync_status: draft
+    sync_action: none
+    last_synced_at:
+    related_criteria: [Оплата успешна, но станция не выдала powerbank]
+    related_jira: [backend-payment-and-powerbank-dispense.md]
+    tags: [rental, coverage-gap]
+    automation_status: manual

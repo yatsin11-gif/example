@@ -9,7 +9,7 @@
 
 **Легенда статуса:** 🟩 `done` (этап пройден) · 🟨 `in-progress` · ⬜ `planned` / нет артефакта · 🟥 `blocked`
 
-**Tally:** фич всего 4 · доведено до Jira 3 · только схемы 1 · с QA test cases 0 · в реализации 0
+**Tally:** фич всего 8 · доведено до Jira 3 · только схемы 1 · с QA test cases 4 · в реализации 0
 
 ---
 
@@ -21,8 +21,12 @@
 | editor | ocr-editable-documents | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | **Jira-ready** | 3 issue: 2 backend (bootstrap OCR-области, background cleaning + Gemini) + 1 frontend (edit OCR flow). Ждёт QA. |
 | editor | background-remover | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | ⬜ | **Jira-ready** | 1 issue: end-to-end backend pipeline. Ждёт QA. |
 | billing | biling-kit | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | **Diagrams-only** | Есть только Mermaid-схемы (flow1, action1, action2). Постановки/criteria ещё нет — нужно начать с feature-spec. |
+| gozap | partners-admin | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA test cases готовы** | 5 Jira-issue (партнёры, привязка станций, баланс, Stripe payout, UI). 6 TC. Ждёт Qase sync + ручной QA review. |
+| gozap | terminal-rental-app | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA test cases готовы** | 4 Jira-issue (account+card, payment+dispense, main flow UI, low-battery UI). 5 TC, 1 coverage gap (TC-005). Ждёт Qase sync. |
+| gozap | admin-roles | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA test cases готовы** | 2 Jira-issue (access levels model, create-admin + nav). 3 TC. Ждёт Qase sync. |
+| gozap | auth | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA test cases готовы** | 2 Jira-issue (SMS OTP service, autofill input). 3 TC. Общая зависимость для partners-admin и terminal-rental-app. Ждёт Qase sync. |
 
-> Колонка «этап» = самый дальний пройденный этап. Следующий шаг для всех editor-фич — **этап 5 (QA test cases)**.
+> Колонка «этап» = самый дальний пройденный этап. Следующий шаг для всех editor-фич — **этап 5 (QA test cases)**. Для всех gozap-фич — **этап 5.5 (Qase sync, требует ручного QA review)**.
 
 ---
 
@@ -43,7 +47,13 @@ flowchart LR
     BR[editor/background-remover · 1 issue]:::done --> JIRA
     BK[billing/biling-kit]:::planned --> D
 
+    PA[gozap/partners-admin · 5 issues]:::done --> QA
+    TRA[gozap/terminal-rental-app · 4 issues]:::done --> QA
+    AR[gozap/admin-roles · 2 issues]:::done --> QA
+    AU[gozap/auth · 2 issues]:::done --> QA
+
     JIRA -.->|следующий шаг для всех| QA
+    QA -.->|следующий шаг для gozap| QASE
 ```
 
 ---

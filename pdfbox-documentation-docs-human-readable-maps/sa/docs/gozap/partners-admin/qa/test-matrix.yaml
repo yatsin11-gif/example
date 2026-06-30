@@ -1,0 +1,205 @@
+feature:
+  id: gozap-partners-admin
+  domain: gozap
+  name: Админка для партнёров
+  status: draft
+
+sources:
+  feature_spec: sa/docs/gozap/partners-admin/requirements/feature-spec.md
+  criteria: sa/docs/gozap/partners-admin/requirements/feature-criteria.md
+  task_breakdown: sa/docs/gozap/partners-admin/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/gozap/partners-admin/jira/backend-partners-model-and-station-binding.md
+    - sa/docs/gozap/partners-admin/jira/backend-partner-balance-calculation.md
+    - sa/docs/gozap/partners-admin/jira/backend-stripe-monthly-payout.md
+    - sa/docs/gozap/partners-admin/jira/admin-partners-list-and-station-binding-ui.md
+    - sa/docs/gozap/partners-admin/jira/admin-partner-cabinet-ui.md
+
+qase:
+  project:
+  suite: Gozap / Partners Admin
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Создание и привязка партнёра/станции с процентом
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [backend-partners-model-and-station-binding.md, admin-partners-list-and-station-binding-ui.md]
+    test_cases:
+      - local_id: TC-001
+        title: Создание партнёра и привязка станции с процентом
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, admin]
+  - title: Расчёт баланса по периоду привязки без пересчёта прошлого
+    source: feature-criteria.md#be-criteria
+    coverage: covered
+    notes:
+    jira: [backend-partner-balance-calculation.md]
+    test_cases:
+      - local_id: TC-002
+        title: Отвязка станции не пересчитывает прошлые начисления
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [balance, edge-case]
+  - title: Ежемесячная Stripe-выплата и обработка отсутствия реквизитов
+    source: feature-criteria.md#be-criteria
+    coverage: partial
+    notes: точное ожидаемое поведение при отсутствии реквизитов не утверждено
+    jira: [backend-stripe-monthly-payout.md]
+    test_cases:
+      - local_id: TC-003
+        title: Ежемесячная выплата при отсутствии реквизитов партнёра
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [payout, stripe, edge-case]
+  - title: Изоляция данных партнёра
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [admin-partner-cabinet-ui.md]
+    test_cases:
+      - local_id: TC-004
+        title: Партнёр видит только свои данные
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, security]
+  - title: CSV-выгрузка по заработку и выплатам
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [admin-partner-cabinet-ui.md]
+    test_cases:
+      - local_id: TC-005
+        title: CSV-выгрузка по выбранному периоду
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, export]
+  - title: Сброс пароля через SMS
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [../auth/jira/backend-sms-otp-service.md]
+    test_cases:
+      - local_id: TC-006
+        title: Сброс пароля партнёра через SMS
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [auth, sms]
+
+test_cases:
+  - local_id: TC-001
+    title: Создание партнёра и привязка станции с процентом
+    status: draft
+    type: functional
+    priority: high
+    severity: high
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Partners Admin
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание и привязка партнёра/станции с процентом]
+    related_jira: [backend-partners-model-and-station-binding.md, admin-partners-list-and-station-binding-ui.md]
+    tags: [partners, admin]
+    automation_status: manual
+  - local_id: TC-002
+    title: Отвязка станции не пересчитывает прошлые начисления
+    status: draft
+    type: functional
+    priority: high
+    severity: high
+    behavior: negative-edge
+    layer: api
+    suite: Gozap / Partners Admin
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Расчёт баланса по периоду привязки без пересчёта прошлого]
+    related_jira: [backend-partner-balance-calculation.md]
+    tags: [balance, edge-case]
+    automation_status: candidate
+  - local_id: TC-003
+    title: Ежемесячная выплата при отсутствии реквизитов партнёра
+    status: draft
+    type: functional
+    priority: high
+    severity: medium
+    behavior: negative-edge
+    layer: api
+    suite: Gozap / Partners Admin
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Ежемесячная Stripe-выплата и обработка отсутствия реквизитов]
+    related_jira: [backend-stripe-monthly-payout.md]
+    tags: [payout, stripe, edge-case]
+    automation_status: candidate
+  - local_id: TC-004
+    title: Партнёр видит только свои данные
+    status: draft
+    type: security
+    priority: high
+    severity: high
+    behavior: negative
+    layer: e2e
+    suite: Gozap / Partners Admin
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Изоляция данных партнёра]
+    related_jira: [admin-partner-cabinet-ui.md]
+    tags: [partners, security]
+    automation_status: candidate
+  - local_id: TC-005
+    title: CSV-выгрузка по выбранному периоду
+    status: draft
+    type: functional
+    priority: medium
+    severity: low
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Partners Admin
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [CSV-выгрузка по заработку и выплатам]
+    related_jira: [admin-partner-cabinet-ui.md]
+    tags: [partners, export]
+    automation_status: manual
+  - local_id: TC-006
+    title: Сброс пароля партнёра через SMS
+    status: draft
+    type: functional
+    priority: medium
+    severity: medium
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Partners Admin
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Сброс пароля через SMS]
+    related_jira: [../auth/jira/backend-sms-otp-service.md]
+    tags: [auth, sms]
+    automation_status: manual

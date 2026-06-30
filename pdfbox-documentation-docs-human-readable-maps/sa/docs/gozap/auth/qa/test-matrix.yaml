@@ -1,0 +1,115 @@
+feature:
+  id: gozap-auth
+  domain: gozap
+  name: Автоматическая вставка кода из SMS
+  status: draft
+
+sources:
+  feature_spec: sa/docs/gozap/auth/requirements/feature-spec.md
+  criteria: sa/docs/gozap/auth/requirements/feature-criteria.md
+  task_breakdown: sa/docs/gozap/auth/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/gozap/auth/jira/backend-sms-otp-service.md
+    - sa/docs/gozap/auth/jira/app-sms-code-autofill-input.md
+
+qase:
+  project:
+  suite: Gozap / Auth
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Автоматическая вставка кода
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [app-sms-code-autofill-input.md]
+    test_cases:
+      - local_id: TC-001
+        title: Автозаполнение кода из SMS
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [auth, sms]
+  - title: Ручной ввод как fallback
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [app-sms-code-autofill-input.md]
+    test_cases:
+      - local_id: TC-002
+        title: Ручной ввод кода как fallback
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [auth, sms]
+  - title: Ограничение числа попыток верификации
+    source: feature-criteria.md#be-criteria
+    coverage: covered
+    notes:
+    jira: [backend-sms-otp-service.md]
+    test_cases:
+      - local_id: TC-003
+        title: Превышение числа попыток ввода кода
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [auth, sms, security]
+
+test_cases:
+  - local_id: TC-001
+    title: Автозаполнение кода из SMS
+    status: draft
+    type: functional
+    priority: medium
+    severity: medium
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Auth
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Автоматическая вставка кода]
+    related_jira: [app-sms-code-autofill-input.md]
+    tags: [auth, sms]
+    automation_status: candidate
+  - local_id: TC-002
+    title: Ручной ввод кода как fallback
+    status: draft
+    type: functional
+    priority: medium
+    severity: medium
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Auth
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Ручной ввод как fallback]
+    related_jira: [app-sms-code-autofill-input.md]
+    tags: [auth, sms]
+    automation_status: candidate
+  - local_id: TC-003
+    title: Превышение числа попыток ввода кода
+    status: draft
+    type: security
+    priority: high
+    severity: medium
+    behavior: negative
+    layer: api
+    suite: Gozap / Auth
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Ограничение числа попыток верификации]
+    related_jira: [backend-sms-otp-service.md]
+    tags: [auth, sms, security]
+    automation_status: candidate

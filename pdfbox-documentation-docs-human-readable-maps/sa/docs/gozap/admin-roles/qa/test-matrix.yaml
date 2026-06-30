@@ -1,0 +1,115 @@
+feature:
+  id: gozap-admin-roles
+  domain: gozap
+  name: Роли в админке
+  status: draft
+
+sources:
+  feature_spec: sa/docs/gozap/admin-roles/requirements/feature-spec.md
+  criteria: sa/docs/gozap/admin-roles/requirements/feature-criteria.md
+  task_breakdown: sa/docs/gozap/admin-roles/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/gozap/admin-roles/jira/backend-access-levels-model.md
+    - sa/docs/gozap/admin-roles/jira/admin-create-admin-and-role-based-navigation.md
+
+qase:
+  project:
+  suite: Gozap / Admin Roles
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Создание админа супер-админом
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [backend-access-levels-model.md, admin-create-admin-and-role-based-navigation.md]
+    test_cases:
+      - local_id: TC-001
+        title: Супер-админ создаёт админа с уровнем доступа
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin-roles]
+  - title: Навигация по уровню доступа
+    source: feature-criteria.md#fe-criteria
+    coverage: covered
+    notes:
+    jira: [admin-create-admin-and-role-based-navigation.md]
+    test_cases:
+      - local_id: TC-002
+        title: Админ видит только разрешённые разделы
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin-roles]
+  - title: Серверная проверка доступа
+    source: feature-criteria.md#be-criteria
+    coverage: covered
+    notes:
+    jira: [backend-access-levels-model.md]
+    test_cases:
+      - local_id: TC-003
+        title: Backend отклоняет запрос к запрещённому разделу
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin-roles, security]
+
+test_cases:
+  - local_id: TC-001
+    title: Супер-админ создаёт админа с уровнем доступа
+    status: draft
+    type: functional
+    priority: high
+    severity: high
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание админа супер-админом]
+    related_jira: [backend-access-levels-model.md, admin-create-admin-and-role-based-navigation.md]
+    tags: [admin-roles]
+    automation_status: candidate
+  - local_id: TC-002
+    title: Админ видит только разрешённые разделы
+    status: draft
+    type: functional
+    priority: high
+    severity: high
+    behavior: positive
+    layer: e2e
+    suite: Gozap / Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Навигация по уровню доступа]
+    related_jira: [admin-create-admin-and-role-based-navigation.md]
+    tags: [admin-roles]
+    automation_status: candidate
+  - local_id: TC-003
+    title: Backend отклоняет запрос к запрещённому разделу
+    status: draft
+    type: security
+    priority: high
+    severity: high
+    behavior: negative
+    layer: api
+    suite: Gozap / Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Серверная проверка доступа]
+    related_jira: [backend-access-levels-model.md]
+    tags: [admin-roles, security]
+    automation_status: candidate

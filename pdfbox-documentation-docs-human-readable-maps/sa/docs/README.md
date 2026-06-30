@@ -52,6 +52,10 @@ sa/docs/<domain>/<feature>/
 - **editor / ocr-editable-documents** — редактируемый OCR выбранной области страницы. [Схема](./editor/ocr-editable-documents/diagrams/overview.md) · [Spec](./editor/ocr-editable-documents/requirements/feature-spec.md)
 - **editor / background-remover** — удаление фона с изображения. [Схема](./editor/background-remover/diagrams/overview.md) · [Spec](./editor/background-remover/requirements/feature-spec.md)
 - **billing / biling-kit** — биллинг (пока только схемы flow/action, постановки нет).
+- **gozap / partners-admin** — админка для партнёров: создание партнёра, привязка станций с % комиссии, кабинет с балансом, выплаты через Stripe. [Схема](./gozap/partners-admin/diagrams/overview.md) · [Spec](./gozap/partners-admin/requirements/feature-spec.md)
+- **gozap / terminal-rental-app** — приложение станции: основной поток (номер + SMS + карта + выдача powerbank) и упрощённый поток для разряженного телефона. [Схема](./gozap/terminal-rental-app/diagrams/overview.md) · [Spec](./gozap/terminal-rental-app/requirements/feature-spec.md)
+- **gozap / admin-roles** — роли в админке: супер-админ создаёт админов с уровнями доступа. [Схема](./gozap/admin-roles/diagrams/overview.md) · [Spec](./gozap/admin-roles/requirements/feature-spec.md)
+- **gozap / auth** — автоматическая вставка кода из SMS с ручным fallback и лимитом попыток. [Схема](./gozap/auth/diagrams/overview.md) · [Spec](./gozap/auth/requirements/feature-spec.md)
 
 ---
 
