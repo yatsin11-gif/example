@@ -107,7 +107,7 @@ criteria:
   - title: Выплаты через Stripe
     source: requirements/feature-criteria.md#выплаты-через-stripe
     coverage: partial
-    notes: Точный Stripe-продукт и сценарий KYC не подтверждены
+    notes: Реквизиты счёта/карты вводятся на стороне Stripe через hosted-редирект (регистрация/авторизация); точный продукт линейки Stripe Connect и объём KYC не подтверждены
     jira:
       - backend-partner-program-stripe-payouts.md
       - frontend-partner-program-partner-dashboard.md
@@ -118,6 +118,12 @@ criteria:
         sync_status: draft
         sync_action: create
         tags: [partners, payments, stripe]
+      - local_id: TC-012
+        title: Партнёр не вводит данные карты в продукте — ввод и просмотр истории выполняются только на стороне Stripe
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, payments, stripe, security]
 
   - title: Выплаты через Stripe — обработка ошибки
     source: requirements/feature-criteria.md#выплаты-через-stripe
@@ -403,3 +409,23 @@ test_cases:
       - backend-partner-program-stripe-payouts.md
     tags: [partners, payments, stripe]
     automation_status: automation candidate
+
+  - local_id: TC-012
+    title: Партнёр не вводит данные карты в продукте — ввод и просмотр истории выполняются только на стороне Stripe
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: E2E
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Выплаты через Stripe]
+    related_jira:
+      - backend-partner-program-stripe-payouts.md
+      - frontend-partner-program-partner-dashboard.md
+    tags: [partners, payments, stripe, security]
+    automation_status: manual
