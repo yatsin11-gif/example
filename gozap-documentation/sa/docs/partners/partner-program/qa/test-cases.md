@@ -20,8 +20,8 @@
 
 ## Coverage Summary
 
-- Criteria total: 10
-- Covered: 9
+- Criteria total: 11
+- Covered: 10
 - Partial: 1
 - Missing: 0
 - Blocked: 0
@@ -96,6 +96,8 @@
    Expected result: Баланс партнёра не изменяется задним числом.
 3. Action: Завершить ещё одну аренду на той же станции после отвязки.
    Expected result: Эта аренда не учитывается в балансе бывшего партнёра.
+4. Action: Привязать станцию обратно к партнёру и завершить ещё одну аренду после повторной привязки.
+   Expected result: Эта аренда снова учитывается в балансе партнёра.
 
 #### Notes
 
@@ -442,6 +444,115 @@
 
 - Проверяет, что данные карты не вводятся и не хранятся в `gozap-admin`/`gozap-backend`.
 
+### TC-013: Поиск партнёров по логину с частичным совпадением
+
+- Status: Draft
+- Type: Functional
+- Priority: Medium
+- Severity: Major
+- Behavior: Positive
+- Layer: E2E
+- Suite: Partner Program
+- Related criteria: Создание и управление партнёром (администратор)
+- Related Jira: `frontend-partner-program-admin-section.md`, `backend-partner-program-accounts-stations-balance.md`
+- Qase case: Не назначено
+- Tags: `partners`, `admin`, `search`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- Существует несколько партнёров с разными логинами, включая логин `partner_smith`.
+
+#### Test Data
+
+- Подстрока логина, например `smith`.
+- Подстрока, не совпадающая ни с одним логином, например `zzzzz`.
+
+#### Steps
+
+1. Action: Ввести в поиск подстроку `smith`.
+   Expected result: В списке отображаются только партнёры, логин которых содержит `smith`, включая `partner_smith`.
+2. Action: Ввести в поиск подстроку `zzzzz`, не совпадающую ни с одним логином.
+   Expected result: Список партнёров пуст.
+
+#### Notes
+
+- 
+
+### TC-014: Сортировка списка партнёров по умолчанию и вручную
+
+- Status: Draft
+- Type: Functional
+- Priority: Medium
+- Severity: Major
+- Behavior: Positive
+- Layer: E2E
+- Suite: Partner Program
+- Related criteria: Создание и управление партнёром (администратор)
+- Related Jira: `frontend-partner-program-admin-section.md`, `backend-partner-program-accounts-stations-balance.md`
+- Qase case: Не назначено
+- Tags: `partners`, `admin`, `sort`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- Существует несколько партнёров, добавленных в разное время и с разными логинами.
+
+#### Test Data
+
+- Партнёры A, B, C с известными датами добавления и логинами.
+
+#### Steps
+
+1. Action: Открыть список партнёров без явного выбора сортировки.
+   Expected result: Партнёры отсортированы по дате добавления от новых к старым.
+2. Action: Переключить сортировку на логин по возрастанию.
+   Expected result: Партнёры отсортированы по логину в алфавитном порядке (А→Я/A→Z).
+3. Action: Переключить сортировку на логин по убыванию.
+   Expected result: Порядок партнёров инвертируется относительно сортировки по логину по возрастанию.
+4. Action: Переключить сортировку на дату добавления от старых к новым.
+   Expected result: Партнёры отсортированы по дате добавления в обратном порядке относительно сортировки по умолчанию.
+
+#### Notes
+
+- 
+
+### TC-015: Изменение процента вознаграждения на станции применяется только к новым завершениям аренды
+
+- Status: Draft
+- Type: Functional
+- Priority: High
+- Severity: Major
+- Behavior: Positive
+- Layer: API
+- Suite: Partner Program
+- Related criteria: Изменение процента вознаграждения не пересчитывает прошлые начисления
+- Related Jira: `backend-partner-program-accounts-stations-balance.md`
+- Qase case: Не назначено
+- Tags: `partners`, `balance`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- Партнёр привязан к станции с процентом `10%`.
+
+#### Test Data
+
+- Минимум 2 завершённые аренды: одна до изменения процента, одна после.
+
+#### Steps
+
+1. Action: Завершить аренду на станции при проценте `10%`.
+   Expected result: В баланс партнёра добавляется доля, рассчитанная по `10%`.
+2. Action: Изменить процент вознаграждения на станции на `20%`.
+   Expected result: Процент станции обновлён; ранее начисленная доля по первой аренде не изменяется.
+3. Action: Завершить ещё одну аренду на той же станции после изменения процента.
+   Expected result: В баланс партнёра добавляется доля, рассчитанная по новому проценту `20%`.
+
+#### Notes
+
+- Подтверждает, что изменение процента применяется только к будущим начислениям, без пересчёта прошлого.
+
 ## Smoke Candidates
 
 - TC-001
@@ -454,6 +565,9 @@
 - TC-003
 - TC-006
 - TC-011
+- TC-013
+- TC-014
+- TC-015
 
 ## Coverage Gaps
 
