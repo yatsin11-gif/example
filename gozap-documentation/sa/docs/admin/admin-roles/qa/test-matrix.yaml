@@ -88,6 +88,21 @@ criteria:
         sync_action: create
         tags: [admin, roles, security]
 
+  - title: Редактирование администратора
+    source: requirements/feature-criteria.md#создание-администратора (BE, "Редактирование администратора")
+    coverage: covered
+    notes:
+    jira:
+      - backend-admin-roles-rbac.md
+      - frontend-admin-roles-create-and-navigation.md
+    test_cases:
+      - local_id: TC-006
+        title: Супер-админ не может отредактировать данные/набор разделов уже созданного администратора
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, roles, security]
+
 test_cases:
   - local_id: TC-001
     title: Супер-админ создаёт администратора с набором разделов
@@ -181,6 +196,26 @@ test_cases:
     sync_action: create
     last_synced_at:
     related_criteria: [Правила пользовательского поведения]
+    related_jira:
+      - backend-admin-roles-rbac.md
+      - frontend-admin-roles-create-and-navigation.md
+    tags: [admin, roles, security]
+    automation_status: automation candidate
+
+  - local_id: TC-006
+    title: Супер-админ не может отредактировать данные/набор разделов уже созданного администратора
+    status: draft
+    type: Security
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: API
+    suite: Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Редактирование администратора]
     related_jira:
       - backend-admin-roles-rbac.md
       - frontend-admin-roles-create-and-navigation.md
