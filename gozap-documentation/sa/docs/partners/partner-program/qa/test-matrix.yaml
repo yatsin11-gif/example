@@ -36,7 +36,7 @@ criteria:
       - backend-partner-program-accounts-stations-balance.md
     test_cases:
       - local_id: TC-001
-        title: Администратор создаёт партнёра с процентом вознаграждения и привязывает станцию
+        title: Администратор создаёт партнёра и привязывает станцию с процентом
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -47,18 +47,6 @@ criteria:
         sync_status: draft
         sync_action: create
         tags: [partners, admin]
-      - local_id: TC-013
-        title: Поиск партнёров по логину с частичным совпадением
-        qase_case_id:
-        sync_status: draft
-        sync_action: create
-        tags: [partners, admin, search]
-      - local_id: TC-014
-        title: Сортировка списка партнёров по умолчанию и вручную
-        qase_case_id:
-        sync_status: draft
-        sync_action: create
-        tags: [partners, admin, sort]
 
   - title: Учёт начислений только за период привязки
     source: requirements/feature-criteria.md#начисление-баланса
@@ -210,7 +198,7 @@ criteria:
 
 test_cases:
   - local_id: TC-001
-    title: Администратор создаёт партнёра с процентом вознаграждения и привязывает станцию
+    title: Администратор создаёт партнёра и привязывает станцию с процентом
     status: draft
     type: Functional
     priority: High
@@ -441,43 +429,3 @@ test_cases:
       - frontend-partner-program-partner-dashboard.md
     tags: [partners, payments, stripe, security]
     automation_status: manual
-
-  - local_id: TC-013
-    title: Поиск партнёров по логину с частичным совпадением
-    status: draft
-    type: Functional
-    priority: Medium
-    severity: Major
-    behavior: Positive
-    layer: E2E
-    suite: Partner Program
-    qase_case_id:
-    sync_status: draft
-    sync_action: create
-    last_synced_at:
-    related_criteria: [Создание и управление партнёром (администратор)]
-    related_jira:
-      - frontend-partner-program-admin-section.md
-      - backend-partner-program-accounts-stations-balance.md
-    tags: [partners, admin, search]
-    automation_status: automation candidate
-
-  - local_id: TC-014
-    title: Сортировка списка партнёров по умолчанию и вручную
-    status: draft
-    type: Functional
-    priority: Medium
-    severity: Major
-    behavior: Positive
-    layer: E2E
-    suite: Partner Program
-    qase_case_id:
-    sync_status: draft
-    sync_action: create
-    last_synced_at:
-    related_criteria: [Создание и управление партнёром (администратор)]
-    related_jira:
-      - frontend-partner-program-admin-section.md
-      - backend-partner-program-accounts-stations-balance.md
-    tags: [partners, admin, sort]
-    automation_status: automation candidate
