@@ -20,8 +20,8 @@
 
 ## Coverage Summary
 
-- Criteria total: 11
-- Covered: 10
+- Criteria total: 10
+- Covered: 9
 - Partial: 1
 - Missing: 0
 - Blocked: 0
@@ -270,38 +270,6 @@
    Expected result: Twilio отправляет SMS с кодом.
 2. Action: Ввести код и установить новый пароль.
    Expected result: Партнёр может залогиниться с новым паролем.
-
-#### Notes
-
-- 
-
-### TC-008: CSV-экспорт по заработку и выплатам
-
-- Status: Draft
-- Type: Functional
-- Priority: Low
-- Severity: Minor
-- Behavior: Positive
-- Layer: E2E
-- Suite: Partner Program
-- Related criteria: CSV-экспорт
-- Related Jira: `frontend-partner-program-partner-dashboard.md`, `backend-partner-program-stripe-payouts.md`
-- Qase case: Не назначено
-- Tags: `partners`, `export`
-- Automation status: manual
-
-#### Preconditions
-
-- У партнёра есть данные по заработку и хотя бы одна выплата.
-
-#### Test Data
-
-- Период экспорта.
-
-#### Steps
-
-1. Action: Запросить выгрузку CSV за выбранный период.
-   Expected result: Файл CSV содержит корректные суммы заработка и выплат за период.
 
 #### Notes
 

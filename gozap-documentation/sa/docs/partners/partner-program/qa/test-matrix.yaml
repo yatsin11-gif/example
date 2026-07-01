@@ -193,21 +193,6 @@ criteria:
         sync_action: create
         tags: [partners, auth, twilio]
 
-  - title: CSV-экспорт
-    source: requirements/feature-criteria.md#выплаты
-    coverage: covered
-    notes:
-    jira:
-      - frontend-partner-program-partner-dashboard.md
-      - backend-partner-program-stripe-payouts.md
-    test_cases:
-      - local_id: TC-008
-        title: CSV-экспорт по заработку и выплатам
-        qase_case_id:
-        sync_status: draft
-        sync_action: create
-        tags: [partners, export]
-
   - title: Администратор видит то же, что партнёр
     source: requirements/feature-criteria.md#создание-и-управление-партнёром-администратор
     coverage: covered
@@ -356,26 +341,6 @@ test_cases:
     related_jira:
       - backend-partner-program-sms-password-reset.md
     tags: [partners, auth, twilio]
-    automation_status: manual
-
-  - local_id: TC-008
-    title: CSV-экспорт по заработку и выплатам
-    status: draft
-    type: Functional
-    priority: Low
-    severity: Minor
-    behavior: Positive
-    layer: E2E
-    suite: Partner Program
-    qase_case_id:
-    sync_status: draft
-    sync_action: create
-    last_synced_at:
-    related_criteria: [CSV-экспорт]
-    related_jira:
-      - frontend-partner-program-partner-dashboard.md
-      - backend-partner-program-stripe-payouts.md
-    tags: [partners, export]
     automation_status: manual
 
   - local_id: TC-009
