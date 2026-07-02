@@ -103,6 +103,21 @@ criteria:
         sync_action: create
         tags: [admin, roles, security]
 
+  - title: Создание курьера (супер-админ)
+    source: requirements/feature-criteria.md#создание-курьера-супер-админ
+    coverage: covered
+    notes: Форма создания — та же, что для администраторов; поля: логин, пароль, статус (по умолчанию «активен»); блокировка необратима
+    jira:
+      - frontend-admin-roles-create-and-navigation.md
+      - backend-admin-roles-rbac.md
+    test_cases:
+      - local_id: TC-007
+        title: Супер-админ создаёт курьера через общую форму
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [admin, roles, courier]
+
 test_cases:
   - local_id: TC-001
     title: Супер-админ создаёт администратора с набором разделов
@@ -221,3 +236,23 @@ test_cases:
       - frontend-admin-roles-create-and-navigation.md
     tags: [admin, roles, security]
     automation_status: automation candidate
+
+  - local_id: TC-007
+    title: Супер-админ создаёт курьера через общую форму
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Admin Roles
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Создание курьера (супер-админ)]
+    related_jira:
+      - frontend-admin-roles-create-and-navigation.md
+      - backend-admin-roles-rbac.md
+    tags: [admin, roles, courier]
+    automation_status: manual

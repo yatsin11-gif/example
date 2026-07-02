@@ -20,8 +20,8 @@
 
 ## Coverage Summary
 
-- Criteria total: 6
-- Covered: 5
+- Criteria total: 7
+- Covered: 6
 - Partial: 1
 - Missing: 0
 - Blocked: 0
@@ -234,10 +234,45 @@
 
 - Подтверждено SA: редактирование данных/набора разделов администратора после создания не предусмотрено продуктом.
 
+### TC-007: Супер-админ создаёт курьера через общую форму
+
+- Status: Draft
+- Type: Functional
+- Priority: High
+- Severity: Critical
+- Behavior: Positive
+- Layer: E2E
+- Suite: Admin Roles
+- Related criteria: Создание курьера (супер-админ)
+- Related Jira: `frontend-admin-roles-create-and-navigation.md`, `backend-admin-roles-rbac.md`
+- Qase case: Не назначено
+- Tags: `admin`, `roles`, `courier`
+- Automation status: manual
+
+#### Preconditions
+
+- Супер-админ залогинен в `gozap-admin`.
+
+#### Test Data
+
+- Логин, пароль для нового курьера.
+
+#### Steps
+
+1. Action: Открыть форму создания учётной записи (ту же, что для администраторов), выбрать роль «курьер», заполнить логин и пароль.
+   Expected result: Курьер создан со статусом «активен» по умолчанию.
+2. Action: Залогиниться под новым курьером.
+   Expected result: Вход выполнен успешно, курьер видит только разрешённые разделы (станции и операции с ПБ).
+
+#### Notes
+
+- Форма создания курьера — та же, что для администраторов. Детальная функциональность курьера описана в `sa/docs/admin/courier-management`.
+
 ## Smoke Candidates
 
 - TC-001
 - TC-003
+- TC-007
 
 ## Automation Candidates
 
