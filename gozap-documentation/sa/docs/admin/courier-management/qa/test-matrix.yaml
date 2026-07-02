@@ -150,10 +150,25 @@ criteria:
         sync_action: create
         tags: [superadmin, courier]
 
+  - title: Создание курьера (супер-админ)
+    source: requirements/feature-criteria.md#создание-курьера-супер-админ
+    coverage: covered
+    notes: Форма создания — та же, что для администраторов; поля: логин, пароль, статус (по умолчанию «активен»)
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-010
+        title: Супер-админ видит список курьеров
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [superadmin, courier]
+
   - title: Редактирование курьера (супер-админ)
     source: requirements/feature-criteria.md#редактирование-курьера-супер-админ
-    coverage: partial
-    notes: Точный набор полей учётной записи курьера не зафиксирован
+    coverage: covered
+    notes:
     jira:
       - frontend-courier-management-ui.md
       - backend-courier-management-accounts-operations.md
