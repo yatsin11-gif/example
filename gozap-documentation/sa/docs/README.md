@@ -52,6 +52,7 @@ sa/docs/<domain>/<feature>/
 - **admin / stations-management** — раздел «Станции»: список станций, создание, архивирование. [Схема](./admin/stations-management/diagrams/overview.md) · [Spec](./admin/stations-management/requirements/feature-spec.md)
 - **admin / user-management** — раздел «Пользователи»: список, создание пользователя, выдача/снятие промоаккаунта, блокировка, карточка пользователя (включая текущую аренду и историю). [Схема](./admin/user-management/diagrams/overview.md) · [Spec](./admin/user-management/requirements/feature-spec.md)
 - **kiosk / terminal-rental-flow** — основной flow аренды на станции (номер, SMS-код, карта, PowerBank), синхронизация аренды с `gozap-app`, push/SMS уведомления, упрощённый flow для разряженного телефона. [Схема](./kiosk/terminal-rental-flow/diagrams/overview.md) · [Spec](./kiosk/terminal-rental-flow/requirements/feature-spec.md)
+- **admin / courier-management** — роль курьера: список станций, карточка (только чтение), операции с ПБ (выдача без QR, выдача всех, возврат); управление курьерами супер-админом (список, редактирование, блокировка). [Схема](./admin/courier-management/diagrams/overview.md) · [Spec](./admin/courier-management/requirements/feature-spec.md)
 - **auth / sms-autofill** — автоподстановка SMS-кода на экране станции. [Схема](./auth/sms-autofill/diagrams/overview.md) · [Spec](./auth/sms-autofill/requirements/feature-spec.md)
 
 ## Внешние интеграции (зафиксировано SA)

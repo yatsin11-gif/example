@@ -7,7 +7,7 @@
 
 **Легенда статуса:** 🟩 `done` (этап пройден) · 🟨 `in-progress` · ⬜ `planned` / нет артефакта · 🟥 `blocked`
 
-**Tally:** фич всего 6 · доведено до Jira 6 · с QA test cases 6 · в Qase sync 0 · в реализации 0
+**Tally:** фич всего 7 · доведено до Jira 7 · с QA test cases 7 · в Qase sync 0 · в реализации 0
 
 ---
 
@@ -19,6 +19,7 @@
 | admin | admin-roles | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA-ready** | 2 Jira-issue (BE RBAC, FE создание администратора + навигация). 5 test cases, 1 partial (код ответа при недоступном разделе не подтверждён). Модель доступа — явный множественный выбор разделов (Станции, Пользователи, Партнёры). Ждёт Qase sync. |
 | admin | stations-management | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA-ready** | 2 Jira-issue (BE CRUD станции, FE раздел «Станции»). 3 test cases. Набор полей станции не зафиксирован (open question). Ждёт Qase sync. |
 | admin | user-management | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA-ready** | 2 Jira-issue (BE CRUD/промо/блокировка/карточка, FE раздел «Пользователи»). 8 test cases. Эффект промоаккаунта и поведение блокировки при активной аренде не зафиксированы (open questions). Ждёт Qase sync. |
+| admin | courier-management | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA-ready** | 2 Jira-issue (BE учётки курьеров/станции/ПБ-операции, FE интерфейс курьера + управление курьерами супер-админом). 13 test cases, 1 partial (набор полей учётной записи курьера не зафиксирован). Ждёт Qase sync. |
 | kiosk | terminal-rental-flow | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA-ready** | 6 Jira-issue (BE: подтверждение номера, оплата/выдача, синхронизация с `gozap-app` и уведомления, упрощённый flow; FE: основной flow, упрощённый flow). 10 test cases, 2 partial (платёжный провайдер терминала не подтверждён). Ждёт Qase sync. |
 | auth | sms-autofill | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | ⬜ | **QA-ready** | 1 Jira-issue (FE автоподстановка кода). 3 test cases, 2 partial (механизм автоподстановки и авто-сабмит не подтверждены). Полностью зависит от backend-контракта `terminal-rental-flow`. |
 
@@ -42,6 +43,7 @@ flowchart LR
     UM[admin/user-management · 2 issues · 8 TC]:::done --> QA
     TRF[kiosk/terminal-rental-flow · 6 issues · 10 TC]:::done --> QA
     SA[auth/sms-autofill · 1 issue · 3 TC]:::done --> QA
+    CM[admin/courier-management · 2 issues · 13 TC]:::done --> QA
 
     QA -.->|следующий шаг для всех| QASE
 ```

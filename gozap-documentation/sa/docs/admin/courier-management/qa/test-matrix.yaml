@@ -1,0 +1,426 @@
+feature:
+  id: courier-management
+  domain: admin
+  name: "Управление курьерами"
+  status: draft
+
+sources:
+  feature_spec: sa/docs/admin/courier-management/requirements/feature-spec.md
+  criteria: sa/docs/admin/courier-management/requirements/feature-criteria.md
+  task_breakdown: sa/docs/admin/courier-management/tasks/task-breakdown.md
+  jira_specs:
+    - sa/docs/admin/courier-management/jira/backend-courier-management-accounts-operations.md
+    - sa/docs/admin/courier-management/jira/frontend-courier-management-ui.md
+
+qase:
+  project:
+  suite: Courier Management
+  suite_id:
+  parent_suite:
+  parent_suite_id:
+  sync_status: draft
+  last_synced_at:
+  sync_blockers:
+    - Qase project не определён
+
+criteria:
+  - title: Вход курьера
+    source: requirements/feature-criteria.md#вход-курьера
+    coverage: covered
+    notes:
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-001
+        title: Курьер входит в систему и видит только разрешённые разделы
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, auth]
+
+  - title: Блокировка курьера
+    source: requirements/feature-criteria.md#блокировка-курьера-супер-админ
+    coverage: covered
+    notes:
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-002
+        title: Заблокированный курьер получает ошибку при входе
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, auth, security]
+      - local_id: TC-012
+        title: Супер-админ блокирует курьера
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [superadmin, courier]
+
+  - title: Список станций (курьер)
+    source: requirements/feature-criteria.md#список-станций-курьер
+    coverage: covered
+    notes:
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-003
+        title: Курьер видит список станций с количеством ПБ и свободных слотов
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, stations]
+      - local_id: TC-004
+        title: Курьер сортирует список станций по количеству ПБ
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, stations]
+
+  - title: Карточка станции (курьер)
+    source: requirements/feature-criteria.md#карточка-станции-курьер
+    coverage: covered
+    notes:
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-005
+        title: Курьер открывает карточку станции (только чтение)
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, stations]
+
+  - title: Операции с ПБ (курьер)
+    source: requirements/feature-criteria.md#операции-с-пб-курьер
+    coverage: covered
+    notes:
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-006
+        title: Курьер выдаёт ПБ без QR-кода
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank]
+      - local_id: TC-007
+        title: Курьер выдаёт все ПБ из станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank]
+      - local_id: TC-008
+        title: Курьер возвращает ПБ на станцию
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank]
+      - local_id: TC-009
+        title: Курьер не может обслуживать офлайн-станцию
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, stations, powerbank]
+      - local_id: TC-013
+        title: Курьер пытается выдать все ПБ с пустой станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank]
+
+  - title: Список курьеров (супер-админ)
+    source: requirements/feature-criteria.md#список-курьеров-супер-админ
+    coverage: covered
+    notes:
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-010
+        title: Супер-админ видит список курьеров
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [superadmin, courier]
+
+  - title: Редактирование курьера (супер-админ)
+    source: requirements/feature-criteria.md#редактирование-курьера-супер-админ
+    coverage: partial
+    notes: Точный набор полей учётной записи курьера не зафиксирован
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-011
+        title: Супер-админ редактирует данные курьера
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [superadmin, courier]
+
+test_cases:
+  - local_id: TC-001
+    title: Курьер входит в систему и видит только разрешённые разделы
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Вход курьера]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, auth]
+    automation_status: manual
+
+  - local_id: TC-002
+    title: Заблокированный курьер получает ошибку при входе
+    status: draft
+    type: Security
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Блокировка курьера]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, auth, security]
+    automation_status: automation candidate
+
+  - local_id: TC-003
+    title: Курьер видит список станций с количеством ПБ и свободных слотов
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Список станций (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, stations]
+    automation_status: manual
+
+  - local_id: TC-004
+    title: Курьер сортирует список станций по количеству ПБ
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Normal
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Список станций (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, stations]
+    automation_status: manual
+
+  - local_id: TC-005
+    title: Курьер открывает карточку станции (только чтение)
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Карточка станции (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, stations]
+    automation_status: manual
+
+  - local_id: TC-006
+    title: Курьер выдаёт ПБ без QR-кода
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank]
+    automation_status: manual
+
+  - local_id: TC-007
+    title: Курьер выдаёт все ПБ из станции
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank]
+    automation_status: manual
+
+  - local_id: TC-008
+    title: Курьер возвращает ПБ на станцию
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank]
+    automation_status: manual
+
+  - local_id: TC-009
+    title: Курьер не может обслуживать офлайн-станцию
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, stations, powerbank]
+    automation_status: manual
+
+  - local_id: TC-010
+    title: Супер-админ видит список курьеров
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Список курьеров (супер-админ)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [superadmin, courier]
+    automation_status: manual
+
+  - local_id: TC-011
+    title: Супер-админ редактирует данные курьера
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Редактирование курьера (супер-админ)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [superadmin, courier]
+    automation_status: manual
+
+  - local_id: TC-012
+    title: Супер-админ блокирует курьера
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Блокировка курьера]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [superadmin, courier]
+    automation_status: manual
+
+  - local_id: TC-013
+    title: Курьер пытается выдать все ПБ с пустой станции
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Normal
+    behavior: Edge case
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank]
+    automation_status: manual
