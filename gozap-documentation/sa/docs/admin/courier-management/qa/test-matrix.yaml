@@ -69,7 +69,7 @@ criteria:
       - backend-courier-management-accounts-operations.md
     test_cases:
       - local_id: TC-003
-        title: Курьер видит список станций с количеством ПБ и свободных слотов
+        title: Курьер видит список станций с количеством ПБ, свободных слотов и статусом
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -90,7 +90,7 @@ criteria:
       - backend-courier-management-accounts-operations.md
     test_cases:
       - local_id: TC-005
-        title: Курьер открывает карточку станции (только чтение)
+        title: Курьер открывает карточку станции (адрес, код, заводской номер, фото, график работы)
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -222,7 +222,7 @@ test_cases:
     automation_status: automation candidate
 
   - local_id: TC-003
-    title: Курьер видит список станций с количеством ПБ и свободных слотов
+    title: Курьер видит список станций с количеством ПБ, свободных слотов и статусом
     status: draft
     type: Functional
     priority: High
@@ -262,7 +262,7 @@ test_cases:
     automation_status: manual
 
   - local_id: TC-005
-    title: Курьер открывает карточку станции (только чтение)
+    title: Курьер открывает карточку станции (адрес, код, заводской номер, фото, график работы)
     status: draft
     type: Functional
     priority: High
