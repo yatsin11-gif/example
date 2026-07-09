@@ -20,8 +20,8 @@
 
 ## Coverage Summary
 
-- Criteria total: 8
-- Covered: 8
+- Criteria total: 11
+- Covered: 11
 - Partial: 0
 - Missing: 0
 - Blocked: 0
@@ -118,7 +118,7 @@
 #### Steps
 
 1. Action: Открыть список станций.
-   Expected result: Список отображает все станции с полями: код станции, адрес, количество ПБ, количество свободных слотов, статус станции.
+   Expected result: Список отображает только назначенные курьеру станции с полями: код станции, адрес, количество ПБ, количество свободных слотов, статус станции.
 
 #### Notes
 
@@ -448,6 +448,202 @@
 
 -
 
+### TC-014: Курьер видит только назначенные ему станции
+
+- Status: Draft
+- Type: Security
+- Priority: High
+- Severity: Critical
+- Behavior: Negative
+- Layer: E2E
+- Suite: Courier Management
+- Related criteria: Список станций (курьер), Назначение станций курьеру (супер-админ)
+- Related Jira: `frontend-courier-management-ui.md`, `backend-courier-management-accounts-operations.md`
+- Qase case: Не назначено
+- Tags: `courier`, `stations`, `security`
+- Automation status: automation candidate
+
+#### Preconditions
+
+- Существуют станции A (назначена курьеру) и B (не назначена курьеру); курьер авторизован.
+
+#### Test Data
+
+- Курьер с назначенной станцией A.
+
+#### Steps
+
+1. Action: Открыть список станций под курьером.
+   Expected result: В списке присутствует станция A и отсутствует станция B.
+2. Action: Попытаться обратиться к станции B напрямую (минуя список).
+   Expected result: Backend отклоняет доступ к неназначенной станции.
+
+#### Notes
+
+-
+
+### TC-015: Курьер сообщает о проблеме по станции через комментарий
+
+- Status: Draft
+- Type: Functional
+- Priority: High
+- Severity: Normal
+- Behavior: Positive
+- Layer: E2E
+- Suite: Courier Management
+- Related criteria: Сообщение о проблеме по станции (курьер)
+- Related Jira: `frontend-courier-management-ui.md`, `backend-courier-management-accounts-operations.md`
+- Qase case: Не назначено
+- Tags: `courier`, `stations`
+- Automation status: manual
+
+#### Preconditions
+
+- Курьер авторизован; существует назначенная станция.
+
+#### Test Data
+
+- Комментарий о проблеме: «не совпадает количество ПБ».
+
+#### Steps
+
+1. Action: В карточке станции отправить комментарий о проблеме (станция повреждена / не работает / не совпадает количество ПБ).
+   Expected result: Комментарий сохранён и доступен супер-админу в журнале действий.
+
+#### Notes
+
+-
+
+### TC-016: Операция с ПБ получает верхнеуровневый статус
+
+- Status: Draft
+- Type: Functional
+- Priority: High
+- Severity: Critical
+- Behavior: Positive
+- Layer: E2E
+- Suite: Courier Management
+- Related criteria: Операции с ПБ (курьер)
+- Related Jira: `frontend-courier-management-ui.md`, `backend-courier-management-accounts-operations.md`
+- Qase case: Не назначено
+- Tags: `courier`, `powerbank`
+- Automation status: manual
+
+#### Preconditions
+
+- Курьер авторизован; доступны онлайн-станция и офлайн/несинхронизированная станция.
+
+#### Test Data
+
+- Онлайн-станция с ПБ; офлайн-станция.
+
+#### Steps
+
+1. Action: Выполнить выдачу ПБ на онлайн-станции.
+   Expected result: Операция получает статус «успех».
+2. Action: Выполнить операцию на офлайн/несинхронизированной станции.
+   Expected result: Операция получает статус «ошибка»/«отказ», не теряется и не завершается успешно.
+
+#### Notes
+
+- Верхнеуровневые статусы: «успех», «ошибка», «отмена», «отказ».
+
+### TC-017: Супер-админ назначает станции курьеру
+
+- Status: Draft
+- Type: Functional
+- Priority: High
+- Severity: Critical
+- Behavior: Positive
+- Layer: E2E
+- Suite: Courier Management
+- Related criteria: Назначение станций курьеру (супер-админ)
+- Related Jira: `frontend-courier-management-ui.md`, `backend-courier-management-accounts-operations.md`
+- Qase case: Не назначено
+- Tags: `superadmin`, `courier`, `stations`
+- Automation status: manual
+
+#### Preconditions
+
+- Супер-админ авторизован; существует курьер и станции.
+
+#### Test Data
+
+- Курьер и список станций для назначения.
+
+#### Steps
+
+1. Action: В карточке курьера назначить список станций.
+   Expected result: Назначенные станции отображаются в карточке курьера; курьер видит их в своём списке станций.
+
+#### Notes
+
+-
+
+### TC-018: Супер-админ удаляет назначение станции курьеру
+
+- Status: Draft
+- Type: Functional
+- Priority: Medium
+- Severity: Normal
+- Behavior: Positive
+- Layer: E2E
+- Suite: Courier Management
+- Related criteria: Назначение станций курьеру (супер-админ)
+- Related Jira: `frontend-courier-management-ui.md`, `backend-courier-management-accounts-operations.md`
+- Qase case: Не назначено
+- Tags: `superadmin`, `courier`, `stations`
+- Automation status: manual
+
+#### Preconditions
+
+- Супер-админ авторизован; курьеру назначена станция.
+
+#### Test Data
+
+- Курьер с назначенной станцией.
+
+#### Steps
+
+1. Action: В карточке курьера удалить назначение станции.
+   Expected result: Станция удалена из назначенных; курьер больше не видит её в своём списке станций.
+
+#### Notes
+
+-
+
+### TC-019: Супер-админ просматривает журнал действий
+
+- Status: Draft
+- Type: Functional
+- Priority: High
+- Severity: Normal
+- Behavior: Positive
+- Layer: E2E
+- Suite: Courier Management
+- Related criteria: Журнал действий (супер-админ)
+- Related Jira: `frontend-courier-management-ui.md`, `backend-courier-management-accounts-operations.md`
+- Qase case: Не назначено
+- Tags: `superadmin`, `courier`, `audit`
+- Automation status: manual
+
+#### Preconditions
+
+- Супер-админ авторизован; курьер выполнил операции с ПБ (включая ошибочную с комментарием).
+
+#### Test Data
+
+- История операций курьера.
+
+#### Steps
+
+1. Action: Открыть журнал действий.
+   Expected result: Отображаются записи с полями: айди курьера, айди станции, действие, время, статус станции, количество ПБ до операции, количество ПБ после операции, результат (успех/ошибка) и причина, комментарий курьера при ошибке.
+
+#### Notes
+
+- Журнал доступен только супер-админу.
+
 ## Smoke Candidates
 
 - TC-001
@@ -455,19 +651,22 @@
 - TC-006
 - TC-010
 - TC-012
+- TC-017
 
 ## Automation Candidates
 
 - TC-002
 - TC-009
+- TC-014
 
 ## Coverage Gaps
 
 - Нет test case на возврат ПБ при отсутствии свободных слотов — поведение продукта не подтверждено (см. edge cases в spec).
 - Поведение при блокировке курьера с активной сессией не подтверждено.
+- Поведение при удалении назначения станции с активной сессией курьера не подтверждено.
 
 ## Open Questions
 
-- Нужно ли логирование операций курьера с ПБ?
 - Что происходит при возврате ПБ на станцию без свободных слотов?
 - Что происходит при блокировке курьера с активной сессией — сессия завершается принудительно?
+- Что происходит при удалении назначения станции, открытой в активной сессии курьера?

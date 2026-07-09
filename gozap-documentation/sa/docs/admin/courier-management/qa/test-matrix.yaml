@@ -69,7 +69,7 @@ criteria:
       - backend-courier-management-accounts-operations.md
     test_cases:
       - local_id: TC-003
-        title: Курьер видит список станций с количеством ПБ, свободных слотов и статусом
+        title: Курьер видит список назначенных станций с количеством ПБ, свободных слотов и статусом
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -180,6 +180,69 @@ criteria:
         sync_action: create
         tags: [superadmin, courier]
 
+  - title: Сообщение о проблеме по станции (курьер)
+    source: requirements/feature-criteria.md#сообщение-о-проблеме-по-станции-курьер
+    coverage: covered
+    notes: Комментарий сохраняется и доступен супер-админу в журнале действий
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-015
+        title: Курьер сообщает о проблеме по станции через комментарий
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, stations]
+
+  - title: Назначение станций курьеру (супер-админ)
+    source: requirements/feature-criteria.md#назначение-станций-курьеру-супер-админ
+    coverage: covered
+    notes: Курьер видит только назначенные станции; назначение и удаление в карточке курьера
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-014
+        title: Курьер видит только назначенные ему станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, stations, security]
+      - local_id: TC-017
+        title: Супер-админ назначает станции курьеру
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [superadmin, courier, stations]
+      - local_id: TC-018
+        title: Супер-админ удаляет назначение станции курьеру
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [superadmin, courier, stations]
+
+  - title: Журнал действий (супер-админ)
+    source: requirements/feature-criteria.md#журнал-действий-супер-админ
+    coverage: covered
+    notes: Верхнеуровневые статусы операции фиксируются в журнале
+    jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    test_cases:
+      - local_id: TC-016
+        title: Операция с ПБ получает верхнеуровневый статус
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank]
+      - local_id: TC-019
+        title: Супер-админ просматривает журнал действий
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [superadmin, courier, audit]
+
 test_cases:
   - local_id: TC-001
     title: Курьер входит в систему и видит только разрешённые разделы
@@ -222,7 +285,7 @@ test_cases:
     automation_status: automation candidate
 
   - local_id: TC-003
-    title: Курьер видит список станций с количеством ПБ, свободных слотов и статусом
+    title: Курьер видит список назначенных станций с количеством ПБ, свободных слотов и статусом
     status: draft
     type: Functional
     priority: High
@@ -438,4 +501,124 @@ test_cases:
     related_jira:
       - backend-courier-management-accounts-operations.md
     tags: [courier, powerbank]
+    automation_status: manual
+
+  - local_id: TC-014
+    title: Курьер видит только назначенные ему станции
+    status: draft
+    type: Security
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Список станций (курьер), Назначение станций курьеру (супер-админ)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, stations, security]
+    automation_status: automation candidate
+
+  - local_id: TC-015
+    title: Курьер сообщает о проблеме по станции через комментарий
+    status: draft
+    type: Functional
+    priority: High
+    severity: Normal
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Сообщение о проблеме по станции (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, stations]
+    automation_status: manual
+
+  - local_id: TC-016
+    title: Операция с ПБ получает верхнеуровневый статус
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер), Журнал действий (супер-админ)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank]
+    automation_status: manual
+
+  - local_id: TC-017
+    title: Супер-админ назначает станции курьеру
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Назначение станций курьеру (супер-админ)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [superadmin, courier, stations]
+    automation_status: manual
+
+  - local_id: TC-018
+    title: Супер-админ удаляет назначение станции курьеру
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Normal
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Назначение станций курьеру (супер-админ)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [superadmin, courier, stations]
+    automation_status: manual
+
+  - local_id: TC-019
+    title: Супер-админ просматривает журнал действий
+    status: draft
+    type: Functional
+    priority: High
+    severity: Normal
+    behavior: Positive
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Журнал действий (супер-админ)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [superadmin, courier, audit]
     automation_status: manual
