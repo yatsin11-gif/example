@@ -88,6 +88,20 @@ criteria:
         sync_action: create
         tags: [partners, balance]
 
+  - title: Начисление доли от дохода после обязательных вычетов
+    source: requirements/feature-criteria.md#начисление-баланса
+    coverage: covered
+    notes: База начисления — реально полученный доход станции после обязательных вычетов по платежам, не полный оборот и не чистая прибыль
+    jira:
+      - backend-partner-program-accounts-stations-balance.md
+    test_cases:
+      - local_id: TC-016
+        title: Доля партнёра рассчитывается от дохода станции после обязательных вычетов по платежам
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [partners, balance]
+
   - title: Правила пользовательского поведения — изоляция данных партнёра
     source: requirements/feature-criteria.md#правила-пользовательского-поведения
     coverage: covered
@@ -475,6 +489,25 @@ test_cases:
     sync_action: create
     last_synced_at:
     related_criteria: [Изменение процента вознаграждения не пересчитывает прошлые начисления]
+    related_jira:
+      - backend-partner-program-accounts-stations-balance.md
+    tags: [partners, balance]
+    automation_status: automation candidate
+
+  - local_id: TC-016
+    title: Доля партнёра рассчитывается от дохода станции после обязательных вычетов по платежам
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Positive
+    layer: API
+    suite: Partner Program
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Начисление доли от дохода после обязательных вычетов]
     related_jira:
       - backend-partner-program-accounts-stations-balance.md
     tags: [partners, balance]
