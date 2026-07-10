@@ -91,7 +91,7 @@ criteria:
   - title: Начисление доли от дохода после обязательных вычетов
     source: requirements/feature-criteria.md#начисление-баланса
     coverage: covered
-    notes: База начисления — реально полученный доход станции после обязательных вычетов по платежам, не полный оборот и не чистая прибыль
+    notes: База начисления — реально полученный доход станции после обязательных вычетов (комиссий Stripe), не полный оборот и не чистая прибыль
     jira:
       - backend-partner-program-accounts-stations-balance.md
     test_cases:
