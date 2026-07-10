@@ -105,19 +105,19 @@ criteria:
       - backend-courier-management-accounts-operations.md
     test_cases:
       - local_id: TC-006
-        title: Курьер выдаёт ПБ без QR-кода
+        title: Курьер забирает ПБ, вводя количество
         qase_case_id:
         sync_status: draft
         sync_action: create
         tags: [courier, powerbank]
       - local_id: TC-007
-        title: Курьер выдаёт все ПБ из станции
+        title: Курьер забирает все доступные ПБ (максимум)
         qase_case_id:
         sync_status: draft
         sync_action: create
         tags: [courier, powerbank]
       - local_id: TC-008
-        title: Курьер возвращает ПБ на станцию
+        title: Курьер добавляет ПБ через «начать»/«завершить»
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -129,7 +129,25 @@ criteria:
         sync_action: create
         tags: [courier, stations, powerbank]
       - local_id: TC-013
-        title: Курьер пытается выдать все ПБ с пустой станции
+        title: Курьер пытается забрать ПБ с пустой станции
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank]
+      - local_id: TC-020
+        title: Забор ПБ — валидация количества (мин 1, макс все доступные)
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank, validation]
+      - local_id: TC-021
+        title: Станция уходит в офлайн в процессе забора ПБ
+        qase_case_id:
+        sync_status: draft
+        sync_action: create
+        tags: [courier, powerbank, stations]
+      - local_id: TC-022
+        title: Кнопка «завершить добавление» недоступна без начатого добавления
         qase_case_id:
         sync_status: draft
         sync_action: create
@@ -345,7 +363,7 @@ test_cases:
     automation_status: manual
 
   - local_id: TC-006
-    title: Курьер выдаёт ПБ без QR-кода
+    title: Курьер забирает ПБ, вводя количество
     status: draft
     type: Functional
     priority: High
@@ -365,7 +383,7 @@ test_cases:
     automation_status: manual
 
   - local_id: TC-007
-    title: Курьер выдаёт все ПБ из станции
+    title: Курьер забирает все доступные ПБ (максимум)
     status: draft
     type: Functional
     priority: High
@@ -385,7 +403,7 @@ test_cases:
     automation_status: manual
 
   - local_id: TC-008
-    title: Курьер возвращает ПБ на станцию
+    title: Курьер добавляет ПБ через «начать»/«завершить»
     status: draft
     type: Functional
     priority: High
@@ -485,7 +503,7 @@ test_cases:
     automation_status: manual
 
   - local_id: TC-013
-    title: Курьер пытается выдать все ПБ с пустой станции
+    title: Курьер пытается забрать ПБ с пустой станции
     status: draft
     type: Functional
     priority: Medium
@@ -499,6 +517,65 @@ test_cases:
     last_synced_at:
     related_criteria: [Операции с ПБ (курьер)]
     related_jira:
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank]
+    automation_status: manual
+
+  - local_id: TC-020
+    title: Забор ПБ — валидация количества (мин 1, макс все доступные)
+    status: draft
+    type: Functional
+    priority: High
+    severity: Major
+    behavior: Negative
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank, validation]
+    automation_status: automation candidate
+
+  - local_id: TC-021
+    title: Станция уходит в офлайн в процессе забора ПБ
+    status: draft
+    type: Functional
+    priority: High
+    severity: Critical
+    behavior: Negative
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - backend-courier-management-accounts-operations.md
+    tags: [courier, powerbank, stations]
+    automation_status: automation candidate
+
+  - local_id: TC-022
+    title: Кнопка «завершить добавление» недоступна без начатого добавления
+    status: draft
+    type: Functional
+    priority: Medium
+    severity: Major
+    behavior: Negative
+    layer: E2E
+    suite: Courier Management
+    qase_case_id:
+    sync_status: draft
+    sync_action: create
+    last_synced_at:
+    related_criteria: [Операции с ПБ (курьер)]
+    related_jira:
+      - frontend-courier-management-ui.md
       - backend-courier-management-accounts-operations.md
     tags: [courier, powerbank]
     automation_status: manual
